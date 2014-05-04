@@ -16,7 +16,8 @@
 		'Left' : 1,
 		'Right' : 2,
 		'JumpLeft' : 3,
-		'JumpRight' : 4
+		'JumpRight' : 4,
+		'Jump' : 5
 	}
 
 	var GameStatus = {
@@ -235,8 +236,9 @@
 			'left' : Action.Left,
 			'right' : Action.Right,
 			'jumpleft' : Action.JumpLeft,
-			'jumpright' : Action.JumpRight
-		}
+			'jumpright' : Action.JumpRight,
+			'jump' : Action.Jump
+ 		}
 
 		return names[name];
 	}
