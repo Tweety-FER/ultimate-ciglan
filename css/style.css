@@ -1,0 +1,323 @@
+body {
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+	background: #DCDCB7 url(../img/bg.gif);
+}
+
+.letter {
+	font-size: 1.5em;
+	margin-right: 5px;
+	color: white;
+	vertical-align: center;
+}
+
+#login {
+	width: 400px;
+	height: 200px;
+	vertical-align: center;
+	margin: 0 auto;
+	background-color: black;
+	border-radius: 15px;
+	border: 2px dashed #DCDCB7;
+	color: rgb(220, 220, 220);
+	text-align: center;
+	padding-top: 30px;
+	box-shadow: 0 0 0 4px black, 2px 1px 6px 4px rgba(10, 10, 0, 0.5);
+}
+
+#header {
+	width: 600px;
+	height: 300px;
+	margin: auto;
+	margin-top: 5px;
+	margin-bottom: 10px;
+}
+
+#header .left {
+	float: left;
+	width: 400px;
+}
+
+#header .left h1 {
+	font-size: 14pt;
+	font-variant: normal;
+	font-family: sans-serif;
+}
+
+#header .right {
+	float: right;
+	width: 200px;
+}
+
+#game {
+	position: relative;
+	margin: auto;
+	width: 600px;
+	height: 330px;
+	border: 1px solid black;
+	background-color: green;
+	border-bottom-left-radius: 15px;
+	border-bottom-right-radius: 15px;
+}
+
+#screen {
+	width: 600px;
+	margin: auto;
+	background-color: blue;
+}
+
+#alphabet {
+	width: 600px;
+	height: 50px;
+	margin: 0;
+	position: absolute;
+	bottom: 40px;
+	text-align: center;
+	background-color: rgba(28, 28, 28, 0.85);
+	vertical-align: bottom;
+	line-height: 50px;
+	overflow-x: hidden;
+	overflow-y: hidden;
+}
+
+#automatons {
+	position: relative;
+	margin: auto;
+	margin-top: 10px;
+	width: 100%;
+	height: 280px;
+	background-color: rgba(200, 200, 200, 0.9);
+	overflow: scroll;
+}
+
+#playbar {
+	width: 600px;
+	height: 40px;
+	margin: 0 auto;
+	position: absolute;
+	bottom: 0;
+	background-color: rgba(28, 28, 28, 0.85);
+	display: inline-block;
+	border-top: 2px dashed #DCDCB7;
+	text-align: center;
+	border-bottom-left-radius: 15px;
+	border-bottom-right-radius: 15px;
+}
+
+#playbar img {
+	display: inline-block;
+	margin-top: 10px;
+	margin-right: 5px;
+	margin-left: 5px;
+	width: 15px;
+	height: 15px;
+}
+
+#playbar img:hover {
+	margin-left: 3px;
+	margin-right: 3px;
+	margin-top: 6px;
+	width: 17px;
+	height: 17px;
+}
+
+#area {
+	margin-top: 60px;
+	height: 400px;
+	width: 8000px;
+	z-index: 0;
+}
+
+div.statecontainer {
+	height: 120px;
+	width: 120px;
+	position: absolute;
+	display: block;
+	margin: 5px;
+	cursor: pointer;
+	z-index: 5;
+}
+
+div.statecontainer img {
+	height: 100px;
+	width: 100px;
+	margin: auto;
+	vertical-align: 0;
+}
+
+div.statecontainer span.statename {
+	font-family: monospace;
+	font-size: 12pt;
+	width: 10px;
+	height: 10px;
+	position: absolute;
+	left: 40px;
+	top: 40px;
+	cursor: inherit;
+}
+
+div.statecontainer .circle {
+	width: 25px;
+	height: 25px;
+	position: absolute;
+}
+
+div.statecontainer .circle img {
+	width: 20px;
+	height: 20px;
+}
+
+div.statecontainer .a {
+	right: 15px;
+	top: 0px;
+}
+
+div.statecontainer .b {
+	right: 5px;
+	top: 20px;
+}
+
+div.statecontainer .c {
+	right: 0px;
+	top: 43px;
+}
+
+div.statecontainer .x {
+	left: 2px;
+	bottom: 23px;
+}
+
+div.statecontainer .circle .text {
+	font-family: monospace;
+	font-size: 10pt;
+	width: 5px;
+	height: 5px;
+	position: absolute;
+	left: 6px;
+	top: 2px;
+}
+
+.buttonlogin {
+	-moz-box-shadow:inset 0px 1px 0px 0px #fceaca;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #fceaca;
+	box-shadow:inset 0px 1px 0px 0px #fceaca;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ffce79), color-stop(1, #eeaf41) );
+	background:-moz-linear-gradient( center top, #ffce79 5%, #eeaf41 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffce79', endColorstr='#eeaf41');
+	background-color:#ffce79;
+	-webkit-border-top-left-radius:15px;
+	-moz-border-radius-topleft:15px;
+	border-top-left-radius:15px;
+	text-indent:0;
+	border:1px solid #eeb44f;
+	display:inline-block;
+	color:#ffffff;
+	font-family:Verdana;
+	font-size:15px;
+	font-weight:bold;
+	font-style:normal;
+	height:40px;
+	line-height:40px;
+	width:100px;
+	text-decoration:none;
+	text-align:center;
+	text-shadow:1px 1px 0px #ce8e28;
+	margin-top: 100px;
+	margin-right: 50px;
+}
+.buttonlogin:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #eeaf41), color-stop(1, #ffce79) );
+	background:-moz-linear-gradient( center top, #eeaf41 5%, #ffce79 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#eeaf41', endColorstr='#ffce79');
+	background-color:#eeaf41;
+}.buttonlogin:active {
+	position:relative;
+	top:1px;
+}
+
+.buttonregister {
+	-moz-box-shadow:inset 0px 1px 0px 0px #fceaca;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #fceaca;
+	box-shadow:inset 0px 1px 0px 0px #fceaca;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ffce79), color-stop(1, #eeaf41) );
+	background:-moz-linear-gradient( center top, #ffce79 5%, #eeaf41 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffce79', endColorstr='#eeaf41');
+	background-color:#ffce79;
+	-webkit-border-top-right-radius:15px;
+	-moz-border-radius-topright:15px;
+	border-top-right-radius:15px;
+	text-indent:0;
+	border:1px solid #eeb44f;
+	display:inline-block;
+	color:#ffffff;
+	font-family:Verdana;
+	font-size:15px;
+	font-weight:bold;
+	font-style:normal;
+	height:40px;
+	line-height:40px;
+	width:100px;
+	text-decoration:none;
+	text-align:center;
+	text-shadow:1px 1px 0px #ce8e28;
+	margin-top: 100px;
+	margin-left:50px;
+}
+.buttonregister:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #eeaf41), color-stop(1, #ffce79) );
+	background:-moz-linear-gradient( center top, #eeaf41 5%, #ffce79 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#eeaf41', endColorstr='#ffce79');
+	background-color:#eeaf41;
+}.buttonregister:active {
+	position:relative;
+	top:1px;
+}
+
+div#actionmenu {
+	z-index: 30;
+	display: block;
+	position: absolute;
+	top: 800px;
+	left: 400px;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-top: 1px;
+	padding-bottom: 1px;
+	background-color: rgba(0, 0, 0, 0.6);
+	color: rgb(240, 240, 240);
+}
+
+#actionmenu ul {
+	padding-top: 0;
+	padding-bottom: 0;
+	list-style-type: none;
+	margin-left: 0;
+	padding-left: 0;
+}
+
+#actionmenu li {
+	border-top: 1px solid black;
+}
+
+#actionmenu ul li:first-child {
+	border-top: none;
+}
+
+.lbl {
+	color: white;
+	padding: 1em;
+}
+
+#score {
+	color: rgba(255,255,255,0.9);
+	font-size: 12pt;
+	margin-left: 2em;
+	margin-right: 2em;
+}
+
+#leftbuttons {
+	float: left;
+}
+
+#rightbuttons {
+	float: right;
+}
