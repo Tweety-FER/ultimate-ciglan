@@ -282,12 +282,16 @@ div#actionmenu {
 	position: absolute;
 	top: 800px;
 	left: 400px;
-	padding-left: 10px;
-	padding-right: 10px;
-	padding-top: 1px;
-	padding-bottom: 1px;
+	padding: 0;
 	background-color: rgba(0, 0, 0, 0.6);
 	color: rgb(240, 240, 240);
+	/* Non-selectible text */
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 
 #actionmenu ul {
@@ -296,14 +300,32 @@ div#actionmenu {
 	list-style-type: none;
 	margin-left: 0;
 	padding-left: 0;
+	margin-top: 0;
+	margin-bottom: 0;
+	padding-left: 2px;
+	padding-right: 2px;
 }
 
 #actionmenu li {
+	font-size: 12pt;
 	border-top: 1px solid black;
+	cursor: pointer;
+	width: 100%;
+}
+
+#actionmenu li:hover {
+	background-color: rgba(255,255,255,0.4);
 }
 
 #actionmenu ul li:first-child {
 	border-top: none;
+	margin-top: 0;
+	padding-top: 0;
+}
+
+#actionmenu ul li:last-child {
+	margin-bottom: 0;
+	padding-bottom: 0;
 }
 
 .lbl {

@@ -118,6 +118,9 @@ Crafty.c('StoneBreak', {
     kill: function() {
         this.isBroken = true;
         this.animate("ani_break");
+        if(Game.sound){
+            Crafty.audio.play("crumble");
+        }
         this.bind("AnimationEnd", function(data){
             this.toggleComponent("spr_stoneBreak","spr_blank");
         })
@@ -194,6 +197,9 @@ Crafty.c("Player", {
                 if(this.inAir){
                     this.animate("ani_playerJumpLeft");
                 } else {
+                    if(Game.sound){
+                        Crafty.audio.play("footstep",1,1);
+                    }
                     this.animate("ani_playerWalkLeft",2);
                 }
                 this.direction = "left";
@@ -202,19 +208,37 @@ Crafty.c("Player", {
                 if(this.inAir){
                     this.animate("ani_playerJumpRight");
                 } else {
+                    if(Game.sound){
+                        Crafty.audio.play("footstep",1,1);
+                    }
                     this.animate("ani_playerWalkRight",2);
                 }
                 this.direction = "right";
                 break;
             case Action.JumpLeft:
+                if(!this.inAir){
+                    if(Game.sound){
+                        Crafty.audio.play("grunt",1,0.6);
+                    }
+                }
                 this.animate("ani_playerJumpLeft",1);
                 this.direction = "left";
                 break;
             case Action.JumpRight:
+                if(!this.inAir){
+                    if(Game.sound){
+                        Crafty.audio.play("grunt",1,0.7);
+                    }
+                }
                 this.animate("ani_playerJumpRight",1);
                 this.direction = "right";
                 break;
             case Action.Jump:
+                if(!this.inAir){
+                    if(Game.sound){
+                        Crafty.audio.play("grunt",1,0.7);
+                    }
+                }
                 if(this.direction == "left"){
                     this.animate("ani_playerJumpLeft",1);
                 } else {
@@ -236,30 +260,32 @@ Crafty.c("Ticker", {
     debugMove: true,
 
     init: function(){
-        this.requires("DOM").bind('KeyDown', function(e) {
-            if(this.debugMove){
-                this.debugMove = false;
-                if(e.key == Crafty.keys.A) {
-                    this.step(Action.Left);
-                    console.log("Action: Left");
-                } else if (e.key == Crafty.keys.D) {
-                    this.step(Action.Right);
-                    console.log("Action: Right");
-                } else if (e.key == Crafty.keys.W) {
-                    this.step(Action.Jump);
-                    console.log("Action: Jump");
-                } else if (e.key == Crafty.keys.Q) {
-                    this.step(Action.JumpLeft);
-                    console.log("Action: Jump Left");
-                } else if (e.key == Crafty.keys.E) {
-                    this.step(Action.JumpRight);
-                    console.log("Action: Jump Right");
-                } else if (e.key == Crafty.keys.S) {
-                    this.step(Action.Stop);
-                    console.log("Action: Stop");
+        if(Game.debug){
+            this.requires("DOM").bind('KeyDown', function(e) {
+                if(this.debugMove){
+                    this.debugMove = false;
+                    if(e.key == Crafty.keys.A) {
+                        this.step(Action.Left);
+                        console.log("Action: Left");
+                    } else if (e.key == Crafty.keys.D) {
+                        this.step(Action.Right);
+                        console.log("Action: Right");
+                    } else if (e.key == Crafty.keys.W) {
+                        this.step(Action.Jump);
+                        console.log("Action: Jump");
+                    } else if (e.key == Crafty.keys.Q) {
+                        this.step(Action.JumpLeft);
+                        console.log("Action: Jump Left");
+                    } else if (e.key == Crafty.keys.E) {
+                        this.step(Action.JumpRight);
+                        console.log("Action: Jump Right");
+                    } else if (e.key == Crafty.keys.S) {
+                        this.step(Action.Stop);
+                        console.log("Action: Stop");
+                    }
                 }
-            }
-        });
+            });
+        }
         this.bind("StartSimulation",this.start);
         this.bind("PauseSimulation",this.pause);
         this.bind("StopSimulation",this.stop);
@@ -285,15 +311,23 @@ Crafty.c("Ticker", {
     },
     finished: function(data){
         console.log("Finished: " + data.toString());
+        Game.textStopToReset = Crafty.e("EndText").attr({x:Game.width()/2-85,y:Game.height()/2+10, w:200}).text("Press stop to reset simulation").textFont({size:"13px"}).unselectable();
+        Game.textStopToReset._globalZ = 100000;
         if(data){
             this.winCondition = true;
             Game.textVictory = Crafty.e("EndText").attr({ x: Game.width()/2-45, y: Game.height()/2-20}).text("Victory!").textFont({ size: '24px'}).unselectable();
             Game.textVictory._globalZ = 100000;
+            if(Game.sound){
+                Crafty.audio.play("victory");
+            }
             this.onWin();
         } else {
             this.winCondition = false;
             Game.textFailure = Crafty.e("EndText").attr({ x: Game.width()/2-55, y: Game.height()/2-20, w:200}).text("Crumbled").textFont({ size: '24px'}).unselectable();
             Game.textFailure._globalZ = 100000;
+            if(Game.sound){
+                Crafty.audio.play("died",1,0.7);
+            }
             this.onLose()
         }
     },
@@ -704,6 +738,8 @@ Crafty.c("Ticker", {
 
     endstep: function(){
 
+        this.normalizePlayer();
+
         playerpos = Game.level.player.at();
         keypos = Game.level.key.at();
         doorpos = Game.level.door.at();
@@ -716,6 +752,9 @@ Crafty.c("Ticker", {
         if(!Game.level.door.isUnlocked){
             if(playerpos.x == keypos.x && playerpos.y == keypos.y){
                 Crafty.trigger("KeyPicked", "");
+                if(Game.sound){
+                    Crafty.audio.play("collect");
+                }
                 Game.level.key.toggleComponent("spr_key","spr_blank");
             }
         } else {
@@ -725,10 +764,42 @@ Crafty.c("Ticker", {
             }
         }
 
-        this.debugMove = true;
+        if(Game.debug){
+            this.debugMove = true;
+        }
         this.onCont();
     },
 
+    normalizePlayer: function() {
+        var pos = {
+            x:Game.level.player.x,
+            y:Game.level.player.y
+        }
+        var mod = {
+            x: pos.x%Game.grid.t.w,
+            y: pos.y%Game.grid.t.h
+        }
+        var newpos = {
+            x:pos.x,
+            y:pos.y
+        }
+        if(mod.x != 0){
+            if(mod.x > Game.grid.t.w/2){
+                newpos.x = (Game.grid.t.w-mod.x)+pos.x;
+            } else {
+                newpos.x = (pos.x - mod.x);
+            }
+        }
+        if(mod.y != 0){
+            if(mod.y > Game.grid.t.h/2){
+                newpos.y = (Game.grid.t.h-mod.y)+pos.y;
+            } else {
+                newpos.y = (pos.y - mod.y);
+            }
+        }
+        Game.level.player.at(newpos.x/16,newpos.y/16);
+
+    },
     //Check player surroundings
     checkPlayerState: function(){
         var playerpos = Game.level.player.at();

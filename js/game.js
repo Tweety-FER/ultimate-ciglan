@@ -19,6 +19,12 @@ l = {
 }
 
 Game = {
+    //if debug is true moveemnt with qweasd is possible
+    debug: true,
+
+    //sound for game part
+    sound: true,
+
     //defines tick time
     tickTime: 1000,
     // This defines our grid's size and the size of each of its tiles
@@ -32,6 +38,7 @@ Game = {
     },
     textVictory: undefined,
     textFailure: undefined,
+    textStopToReset: undefined,
     level: {
         t: [],
         player: undefined,
@@ -120,6 +127,10 @@ Game = {
             Game.textFailure.destroy();
             Game.textFailure = undefined;
         }
+        if(Game.textStopToReset != undefined) {
+            Game.textStopToReset.destroy();
+            Game.textStopToReset = undefined;
+        }
         for(var y in Game.level.t){
             for(var x in Game.level.t[y]){
                 //blank = 0, brick = 1, brickMoss = 2, grass = 3, door = 4, key = 5, stone = 6, stoneMoss = 7, stoneBreak = 8, spikeUp = 9, spikeLeft = 10, spikeDown = 11, spikeRight = 12, player = 13
@@ -198,7 +209,14 @@ Game = {
         Crafty.sprite()
         Crafty.scene("loading", function() {
             Crafty.e("2D, DOM, Text").attr({ x: Game.width()/2-30, y:  Game.height()/2 }).text("Loading");
-            Crafty.load(['img/spritesheet.png','img/tileset.png'], function() {
+            Crafty.load(['img/spritesheet.png','img/tileset.png', 'snd/crumble.mp3', 'snd/died.mp3', 'snd/footstep.mp3', 'snd/victory.mp3', 'snd/collect.mp3', 'snd/grunt.mp3'], function() {
+
+                Crafty.audio.add("crumble", "snd/crumble.mp3");
+                Crafty.audio.add("died", "snd/died.mp3");
+                Crafty.audio.add("footstep", "snd/footstep.mp3");
+                Crafty.audio.add("victory", "snd/victory.mp3");
+                Crafty.audio.add("collect", "snd/collect.mp3");
+                Crafty.audio.add("grunt","snd/grunt.mp3");
                 Crafty.sprite(16,'img/spritesheet.png',{
                     spr_player: [0,0]
                 },0,0);
@@ -226,7 +244,7 @@ Game = {
 
             function(e) {
                 //uh oh, error loading
-                console.out("Error loading images and sounds");
+                console.log("Error loading images and sounds");
             });
 
         });

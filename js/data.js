@@ -51,6 +51,9 @@
 	//Current status of the automaton-running engine
 	var status = Status.Stop;
 
+	//Current game status
+	var gameStatus = GameStatus.InProgress;
+
 	//Current state in the transitions
 	var currentState = undefined;
 
@@ -166,6 +169,9 @@
 			for(var i = 0; i < children.length; i++) {
 				instance.detachAllConnections(children[i]);
 			}
+
+			var id = $(this).attr('id');
+			delete states[id];
 			
 			instance.repaintEverything();
 			$(this).remove();
@@ -388,6 +394,68 @@
 		}
 	}
 
+	function setSound(value) {
+		if(value === true) {
+			Game.sound = true;
+			$('#sound').attr('src', 'img/SoundOn.png');
+			return;
+		}
+
+		Game.sound = false;
+		$('#sound').attr('src', 'img/SoundOff.png');
+	}
+
+	function pause(e) {
+		e.preventDefault();
+		if(gameStatus === GameStatus.Lose) {
+			stop(e);
+			return;
+		}
+
+		status = Status.Pause;
+		enableImage();
+		Crafty.trigger("PauseSimulation", '');
+	}
+
+	function play(e) {
+		e.preventDefault();
+
+		if (gameStatus === GameStatus.Lose) {
+			alert("He's dead, Jim!");
+			return;
+		}
+
+		if(currentState == undefined) {
+			currentState = findFirstAvailableState();
+			if(currentState == null) {
+				alert('You need at least one state for this to work, silly!');
+				currentState = undefined;
+				return;
+			}
+		}
+
+		if(status == Status.Play) {
+			return;
+		}
+
+		hideButtons();
+		status = Status.Play;
+		enableImage();
+		execute();
+		Crafty.trigger("StartSimulation", {onWin: success, onLose: failure, onCont: execute});
+	}
+
+	function stop(e) {
+		e.preventDefault();
+		status = Status.Stop;
+		gameStatus = GameStatus.InProgress;
+		enableImage();
+		currentState = undefined;
+		lowercaseInput();
+		letterIndex = 0;
+		Crafty.trigger("StopSimulation", '');
+	}
+
 	/*
 	*	Executes the currenly set up automatons.
 	*/
@@ -411,17 +479,14 @@
 		letterIndex = (letterIndex + 1) % inputStr.length;
 
 		Crafty.trigger('Step', queue.shift());
-		//var retStatus = mock(); //TODO Replace this with functionality	
-		//if(retStatus == Status.Win) success();
-		//else if(retStatus == Status.Lose) failure();
 	}
 
 	function success() {
-		status = Status.Win;
+		gameStatus = GameStatus.Win;
 	}
 
 	function failure() {
-		status = Status.Lose;
+		gameStatus = GameStatus.Lose;
 	}
 
 	/*
@@ -458,58 +523,25 @@
 
 		$('#new').on('click', function(e) {
 			e.preventDefault();
-			//addState();
-			addingState = true;
+			addingState = !addingState;
 			enableRightImage();
 		});
 
 		$('#delete').on('click', function(e) {
 			e.preventDefault();
-			deletingState = true;
+			deletingState = !deletingState;
 			enableRightImage();
 		})
 
-		$('#play').on('click', function(e) {
-			e.preventDefault();
-			if(currentState == undefined) {
-				currentState = findFirstAvailableState();
-				if(currentState == null) {
-					alert('You need at least one state for this to work, silly!');
-					currentState = undefined;
-					return;
-				}
-			}
+		$('#play').on('click', play);
 
-			if(status == Status.Play) {
-				return;
-			}
+		$('#stop').on('click', stop);
 
-			hideButtons();
-			status = Status.Play;
-			enableImage();
-			execute();
-			Crafty.trigger("StartSimulation", {onWin: success, onLose: failure, onCont: execute});
-		});
-
-		$('#stop').on('click', function(e) {
-			e.preventDefault();
-			status = Status.Stop;
-			enableImage();
-			currentState = undefined;
-			lowercaseInput();
-			letterIndex = 0;
-			Crafty.trigger("StopSimulation", '');
-		});
-
-		$('#pause').on('click', function(e) {
-			e.preventDefault();
-			status = Status.Pause;
-			enableImage();
-			Crafty.trigger("PauseSimulation", '');
-		})
+		$('#pause').on('click', pause)
 		
 		$('#area').on('click', function(e) {
 			hideButtons(); 
+			$('#menu').hide();
 			active = null;
 			if(addingState === true) {
 				addingState = false;
@@ -520,6 +552,11 @@
 				addState(pos.x - divOffset, pos.y - yOffset - divOffset);
 			}
 		});
+
+		$('#sound').on('click', function() {
+			setSound(!Game.sound);
+		})
+
 		enableImage();
 
 		instance = jsPlumb.getInstance({
