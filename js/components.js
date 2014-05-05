@@ -198,7 +198,7 @@ Crafty.c("Player", {
                     this.animate("ani_playerJumpLeft");
                 } else {
                     if(Game.sound){
-                        Crafty.audio.play("footstep",1,1);
+                        Crafty.audio.play("footstep",1,0.4);
                     }
                     this.animate("ani_playerWalkLeft",2);
                 }
@@ -209,7 +209,7 @@ Crafty.c("Player", {
                     this.animate("ani_playerJumpRight");
                 } else {
                     if(Game.sound){
-                        Crafty.audio.play("footstep",1,1);
+                        Crafty.audio.play("footstep",1,0.4);
                     }
                     this.animate("ani_playerWalkRight",2);
                 }

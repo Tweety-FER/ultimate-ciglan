@@ -549,6 +549,11 @@
 
 		status = Status.Stop;
 
+		$('body').on('click', function(e) {
+			active = null;
+			$('#actionmenu').hide();
+		});
+
 		$('#actionmenu').hide();
 
 		$('#actionmenu img').on('click', menuClick);
@@ -570,10 +575,9 @@
 		$('#stop').on('click', stop);
 
 		$('#pause').on('click', pause)
-		
+
 		$('#area').on('click', function(e) {
 			hideButtons(); 
-			$('#menu').hide();
 			active = null;
 			if(addingState === true) {
 				addingState = false;
