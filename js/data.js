@@ -1,4 +1,4 @@
-{
+
 	/*
 	*	An enumeration describing the current state of the automaton engine.
 	*/
@@ -58,6 +58,10 @@
 	var newState = undefined;
 
 	var instance = undefined;
+
+	var addingState = false;
+
+	var deletingState = false;
 
 
 	/*
@@ -155,6 +159,21 @@
 	function stateDoubleclick(e) {
 		e.preventDefault();
 		e.stopPropagation();
+
+		if(deletingState) {
+			var children = $(this).children();
+
+			for(var i = 0; i < children.length; i++) {
+				instance.detachAllConnections(children[i]);
+			}
+			
+			instance.repaintEverything();
+			$(this).remove();
+			deletingState = false;
+			enableRightImage();
+			return;
+		}
+
 		if(active !== null) {		
 			newState = states[$(this).attr('id')];		
 			placeMenu(e);
@@ -272,9 +291,13 @@
 	/*
 	*	Adds a new state on the board and activates its handlers.
 	*/
-	function addState() {
+	function addState(x, y) {
 		var state = new State();
 		states[state.Name] = state;
+
+		var x = typeof x === 'undefined' ? '100px' : x + 'px';
+		var y = typeof y === 'undefined' ? '100px' : y + 'px';
+
 
 		//The html of a state, with id generated according to the state name
 		var div = $('<div id="' + state.Name + '" class="statecontainer">\
@@ -300,8 +323,8 @@
 
 		jsPlumb.draggable(div);
 
-		div.css('left', '100px');
-		div.css('top', '100px');
+		div.css('left', x);
+		div.css('top', y);
 
 		//Event handler for doubleclick
 		div.on('click', stateDoubleclick);
@@ -341,20 +364,27 @@
 		elem.html(elem.html().toUpperCase());
 	}
 
-	function disableImages() {
+	function enableImage() {
 		$('#play').attr('src', 'img/Play.png');
 		$('#pause').attr('src', 'img/Pause.png');
 		$('#stop').attr('src', 'img/Stop.png');
-	}
-
-	function enableImage() {
-		disableImages();
 		if(status == Status.Stop) {
 			$('#stop').attr('src', 'img/StopOn.png');
 		} else if(status == Status.Pause) {
 			$('#pause').attr('src', 'img/PauseOn.png');
 		} else if(status == Status.Play) {
 			$('#play').attr('src', 'img/PlayOn.png');
+		}
+	}
+
+	function enableRightImage() {
+		$('#new').attr('src', 'img/New.png');
+		$('#delete').attr('src', 'img/Delete.png');
+
+		if(addingState) {
+			$('#new').attr('src', 'img/NewOn.png');
+		} else if(deletingState) {
+			$('#delete').attr('src', 'img/DeleteOn.png');
 		}
 	}
 
@@ -380,18 +410,18 @@
 
 		letterIndex = (letterIndex + 1) % inputStr.length;
 
-		var retStatus = mock(); //TODO Replace this with functionality
-			
-		if(retStatus == Status.Win) success();
-		else if(retStatus == Status.Lose) failure();
+		Crafty.trigger('Step', queue.shift());
+		//var retStatus = mock(); //TODO Replace this with functionality	
+		//if(retStatus == Status.Win) success();
+		//else if(retStatus == Status.Lose) failure();
 	}
 
 	function success() {
-		//TODO
+		status = Status.Win;
 	}
 
 	function failure() {
-		//TODO
+		status = Status.Lose;
 	}
 
 	/*
@@ -403,16 +433,22 @@
 		});
 	}
 
-	function mock() {
-		queue.shift();
-		setTimeout(function() {execute();}, 1000);
-		return GameStatus.InProgress;
+	function resizePlayingArea() {
+		var area = $('#automatons');
+		var viewPortH = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+		var position = area.position();
+		var margin = 10;
+
+		area.height(viewPortH - position.top - margin);
 	}
  
 	window.onload = function() {
 		inputStr= $('#alphabet').html().trim();
 		letterIndex = 0;
 		spanify();
+
+		resizePlayingArea();
+		window.onresize = resizePlayingArea;
 
 		status = Status.Stop;
 
@@ -422,8 +458,16 @@
 
 		$('#new').on('click', function(e) {
 			e.preventDefault();
-			addState()
+			//addState();
+			addingState = true;
+			enableRightImage();
 		});
+
+		$('#delete').on('click', function(e) {
+			e.preventDefault();
+			deletingState = true;
+			enableRightImage();
+		})
 
 		$('#play').on('click', function(e) {
 			e.preventDefault();
@@ -444,6 +488,7 @@
 			status = Status.Play;
 			enableImage();
 			execute();
+			Crafty.trigger("StartSimulation", {onWin: success, onLose: failure, onCont: execute});
 		});
 
 		$('#stop').on('click', function(e) {
@@ -453,15 +498,28 @@
 			currentState = undefined;
 			lowercaseInput();
 			letterIndex = 0;
+			Crafty.trigger("StopSimulation", '');
 		});
 
 		$('#pause').on('click', function(e) {
 			e.preventDefault();
 			status = Status.Pause;
 			enableImage();
+			Crafty.trigger("PauseSimulation", '');
 		})
 		
-		$('#area').on('click', function(e) {hideButtons(); active = null; });
+		$('#area').on('click', function(e) {
+			hideButtons(); 
+			active = null;
+			if(addingState === true) {
+				addingState = false;
+				enableRightImage();
+				var pos = mousePos(e);
+				var yOffset = $('#automatons').position().top + 15;
+				var divOffset = 15;
+				addState(pos.x - divOffset, pos.y - yOffset - divOffset);
+			}
+		});
 		enableImage();
 
 		instance = jsPlumb.getInstance({
@@ -481,4 +539,3 @@
 			Container:"area"
 		});
 	}
-}

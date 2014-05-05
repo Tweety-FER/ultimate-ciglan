@@ -6,19 +6,21 @@ l = {
         [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
         [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
         [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
-        [1,0,0,0,0,0,0,0,0,0,8,0,0,0,0,0,0,0,0,0,0,0,0,1],
+        [1,0,0,0,0,8,8,8,8,8,8,0,0,0,0,0,0,0,0,0,0,0,0,1],
         [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+        [1,0,0,0,8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
         [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
-        [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
-        [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
-        [1,0,0,0,0,0,0,10,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
-        [1,0,0,0,4,0,9,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
-        [1,13,0,0,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+        [1,0,0,0,0,8,0,0,0,0,9,4,0,0,0,0,0,0,0,0,0,0,0,1],
+        [1,12,0,0,0,0,0,3,6,8,8,6,0,0,0,0,0,0,0,0,0,0,0,1],
+        [1,0,0,0,1,1,2,2,6,0,10,6,0,0,0,0,0,0,0,0,0,0,0,1],
+        [1,13,0,0,5,0,0,0,0,0,0,6,0,0,0,0,0,0,0,0,0,0,0,1],
         [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
     ]
 }
 
 Game = {
+    //defines tick time
+    tickTime: 1000,
     // This defines our grid's size and the size of each of its tiles
     grid: {
         w: 24,
@@ -28,14 +30,96 @@ Game = {
             h: 16
         }
     },
-
+    textVictory: undefined,
+    textFailure: undefined,
     level: {
         t: [],
-        player: undefined
+        player: undefined,
+        door: undefined,
+        key: undefined,
+        breakable: [],
+        solids: [],
+        deadly: [],
+        rest: [],
+
+        clear: function(){
+            Crafty('GamePart').each(function() { this.destroy(); });
+            this.player = undefined;
+            this.door = undefined;
+            this.key = undefined;
+            this.breakable = [];
+            this.solids = [];
+            this.deadly = [];
+            this.rest = [];
+        },
+        typeOf: function(x,y){
+            if(x>=0 && x<Game.grid.w){
+                if(y>=0 && y<Game.grid.h){
+                    for(var c in this.solids){
+                        var pos = this.solids[c].at();
+                        if(pos.x == x && pos.y == y){
+                            return "solid"
+                        }
+                    }
+                    for(var c in this.breakable){
+                        var pos = this.breakable[c].at();
+                        if(pos.x == x && pos.y == y){
+                            if(this.breakable[c].isTriggered){
+                                if(this.breakable[c].isBroken){
+                                    return "free";
+                                } else {
+                                    return "triggered";
+                                }
+                            }
+                            return "breakable"
+                        }
+                    }
+                    return "free";
+                }
+            }
+            return "solid"
+        },
+        triggerBreakable: function(pos){
+            for(var c in this.breakable){
+                if(!this.breakable[c].isBroken){
+                    var bpos = this.breakable[c].at();
+                    if(bpos.x == pos.x && bpos.y == pos.y){
+                        this.breakable[c].trigg();
+                    }
+                }
+            }
+        },
+        killBreakable: function(pos){
+            for(var c in this.breakable){
+                if(!this.breakable[c].isBroken){
+                    var bpos = this.breakable[c].at();
+                    if(bpos.x == pos.x && bpos.y == pos.y){
+                        this.breakable[c].kill();
+                    }
+                }
+            }
+        },
+        touchedDeadly: function(pos){
+            for(var c in this.deadly){
+                var dpos = this.deadly[c].at();
+                if(dpos.x == pos.x && dpos.y == pos.y){
+                    return true;
+                }
+            }
+            return false;
+        }
     },
 
     levelLoad: function(){
-        Game.level.t = l.t;
+        Game.level.clear();
+        if(Game.textVictory !== undefined){
+            Game.textVictory.destroy();
+            Game.textVictory = undefined;
+        }
+        if(Game.textFailure !== undefined){
+            Game.textFailure.destroy();
+            Game.textFailure = undefined;
+        }
         for(var y in Game.level.t){
             for(var x in Game.level.t[y]){
                 //blank = 0, brick = 1, brickMoss = 2, grass = 3, door = 4, key = 5, stone = 6, stoneMoss = 7, stoneBreak = 8, spikeUp = 9, spikeLeft = 10, spikeDown = 11, spikeRight = 12, player = 13
@@ -43,40 +127,40 @@ Game = {
                     case 0:
                         break;
                     case 1:
-                        Crafty.e("Brick").at(x,y);
+                        Game.level.solids.push(Crafty.e("Brick").at(x,y));
                         break;
                     case 2:
-                        Crafty.e("BrickMoss").at(x,y);
+                        Game.level.solids.push(Crafty.e("BrickMoss").at(x,y));
                         break;
                     case 3:
-                        Crafty.e("Grass").at(x,y);
+                        Game.level.rest.push(Crafty.e("Grass").at(x,y));
                         break;
                     case 4:
-                        Crafty.e("Door").at(x,y);
+                        Game.level.door = Crafty.e("Door").at(x,y);
                         break;
                     case 5:
-                        Crafty.e("Key").at(x,y);
+                        Game.level.key = Crafty.e("Key").at(x,y);
                         break;
                     case 6:
-                        Crafty.e("Stone").at(x,y);
+                        Game.level.solids.push(Crafty.e("Stone").at(x,y));
                         break;
                     case 7:
-                        Crafty.e("StoneMoss").at(x,y);
+                        Game.level.solids.push(Crafty.e("StoneMoss").at(x,y));
                         break;
                     case 8:
-                        Crafty.e("StoneBreak").at(x,y);
+                        Game.level.breakable.push(Crafty.e("StoneBreak").at(x,y));
                         break;
                     case 9:
-                        Crafty.e("Spike").rot("up").at(x,y);
+                        Game.level.deadly.push(Crafty.e("Spike").rot("up").at(x,y));
                         break;
                     case 10:
-                        Crafty.e("Spike").rot("left").at(x,y);
+                        Game.level.deadly.push(Crafty.e("Spike").rot("left").at(x,y));
                         break;
                     case 11:
-                        Crafty.e("Spike").rot("down").at(x,y);
+                        Game.level.deadly.push(Crafty.e("Spike").rot("down").at(x,y));
                         break;
                     case 12:
-                        Crafty.e("Spike").rot("right").at(x,y);
+                        Game.level.deadly.push(Crafty.e("Spike").rot("right").at(x,y));
                         break;
                     case 13:
                         Game.level.player = Crafty.e("Player").at(x,y);
@@ -84,6 +168,13 @@ Game = {
                 }
 
             }
+        }
+        var playerpos = Game.level.player.at();
+        if(Game.level.typeOf(playerpos.x,playerpos.y+1) == "free"){
+            Game.level.player.inAir = true;
+        }
+        if(Game.level.typeOf(playerpos.x,playerpos.y+1) == "breakable"){
+            Game.level.triggerBreakable({x:playerpos.x,y:playerpos.y+1});
         }
     },
     // The total width of the game screen. Since our grid takes up the entire screen
@@ -102,10 +193,11 @@ Game = {
     start: function() {
 
         Crafty.init(Game.width(), Game.height());
-        Crafty.background('rgb(128, 188, 234)');
+        Crafty.background('#4fc4ff url(img/bck.png)');
 
         Crafty.sprite()
         Crafty.scene("loading", function() {
+            Crafty.e("2D, DOM, Text").attr({ x: Game.width()/2-30, y:  Game.height()/2 }).text("Loading");
             Crafty.load(['img/spritesheet.png','img/tileset.png'], function() {
                 Crafty.sprite(16,'img/spritesheet.png',{
                     spr_player: [0,0]
@@ -134,15 +226,16 @@ Game = {
 
             function(e) {
                 //uh oh, error loading
-                console.out("Error loading images");
+                console.out("Error loading images and sounds");
             });
 
         });
         Crafty.scene("loading");
 
         Crafty.scene("main", function(){
+            Game.level.t = l.t;
             Game.levelLoad();
-            Game.level.player.moving(2);
+            var ticker = Crafty.e("Ticker");
         });
     }
 };
