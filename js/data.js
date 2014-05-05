@@ -143,15 +143,41 @@
         return {'x' : e.pageX, 'y' : e.pageY};
 	}
 
+	function getClosest(x, y) {
+		var ret = {'x' : x, 'y': y};
+		var dist = Infinity;
+
+		$('.automatonimg').each(function(i) {
+			//$(this).css('background-color', 'red');
+			var position = $(this).parent().position();
+
+			var distance = Math.floor(Math.sqrt(
+				Math.pow(position.left - x, 2),
+				Math.pow(position.top - y, 2)
+				));
+
+			if(distance < dist) {
+				ret = {'x' : position.left, 'y': position.top};
+				dist = distance;
+			}
+		});
+
+		return ret;
+	}
+
 	/*
 	*	Places the action selection menu on the click location
 	*/
 	function placeMenu(e) {
 		var pos = mousePos(e);
 		var menu = $('#actionmenu');
+		var truePos = getClosest(pos.x, pos.y);
+		var area = $('#automatons');
+		var xOffset = 30;
+		var yOffset = area.offset().top - 35;
 
-		menu.css('top', pos.y);
-		menu.css('left', pos.x);
+		menu.css('top', truePos.y + yOffset);
+		menu.css('left', truePos.x - xOffset);
 		menu.show();
 	}
 
@@ -262,7 +288,13 @@
 			'right' : Action.Right,
 			'jumpleft' : Action.JumpLeft,
 			'jumpright' : Action.JumpRight,
-			'jump' : Action.Jump
+			'jump' : Action.Jump,
+			'chalt' : Action.Stop,
+			'cleft' : Action.Left,
+			'cright' : Action.Right,
+			'cjumpleft' : Action.JumpLeft,
+			'cjumpright' : Action.JumpRight,
+			'cjump' : Action.Jump
  		}
 
 		return names[name];
@@ -519,7 +551,7 @@
 
 		$('#actionmenu').hide();
 
-		$('#actionmenu ul li').on('click', menuClick);
+		$('#actionmenu img').on('click', menuClick);
 
 		$('#new').on('click', function(e) {
 			e.preventDefault();

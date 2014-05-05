@@ -51,7 +51,7 @@ body {
 #game {
 	position: relative;
 	margin: auto;
-	width: 600px;
+	width: 480px;
 	height: 330px;
 	border: 1px solid black;
 	background-color: #2fa4dd;
@@ -60,13 +60,13 @@ body {
 }
 
 #screen {
-	width: 600px;
+	width: 480px;
 	margin: auto;
 	background-color: blue;
 }
 
 #alphabet {
-	width: 600px;
+	width: 480px;
 	height: 50px;
 	margin: 0;
 	position: absolute;
@@ -94,7 +94,7 @@ body {
 }
 
 #playbar {
-	width: 600px;
+	width: 480px;
 	height: 40px;
 	margin: 0 auto;
 	position: absolute;
@@ -276,56 +276,79 @@ div.statecontainer .circle .text {
 	top:1px;
 }
 
-div#actionmenu {
+#actionmenu {
 	z-index: 30;
 	display: block;
 	position: absolute;
 	top: 800px;
 	left: 400px;
+	width: 170px;
+	height: 170px;
 	padding: 0;
-	background-color: rgba(0, 0, 0, 0.6);
-	color: rgb(240, 240, 240);
-	/* Non-selectible text */
-	-webkit-touch-callout: none;
-	-webkit-user-select: none;
-	-khtml-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
 }
 
-#actionmenu ul {
-	padding-top: 0;
-	padding-bottom: 0;
-	list-style-type: none;
-	margin-left: 0;
-	padding-left: 0;
-	margin-top: 0;
-	margin-bottom: 0;
-	padding-left: 2px;
-	padding-right: 2px;
+#actionmenu img {
+	position: absolute;
 }
 
-#actionmenu li {
-	font-size: 12pt;
-	border-top: 1px solid black;
-	cursor: pointer;
-	width: 100%;
+#actionmenu #halt {
+	bottom: 4px;
+	left: 75px;
 }
 
-#actionmenu li:hover {
-	background-color: rgba(255,255,255,0.4);
+#actionmenu #jump {
+	top: 4px;
+	left: 75px;
 }
 
-#actionmenu ul li:first-child {
-	border-top: none;
-	margin-top: 0;
-	padding-top: 0;
+#actionmenu #right {
+	right: 4px;
+	top: 74px;
 }
 
-#actionmenu ul li:last-child {
-	margin-bottom: 0;
-	padding-bottom: 0;
+#actionmenu #left {
+	left: 4px;
+	top: 74px;
+}
+
+#actionmenu #jumpright {
+	right: 9px;
+	top: 9px;
+}
+
+#actionmenu #jumpleft {
+	left: 9px;
+	top: 9px;
+}
+
+#actionmenu #chalt {
+	bottom: 0;
+	left: 70px;
+}
+
+#actionmenu #cjump {
+	top: 0;
+	left: 70px;
+}
+
+#actionmenu #cright {
+	right: 0;
+	top: 70px;
+}
+
+#actionmenu #cleft {
+	left: 0;
+	top: 70px;
+}
+
+#actionmenu #cjumpright {
+	right: 5px;
+	top: 5px;
+}
+
+#actionmenu #cjumpleft {
+	left: 5px;
+	top: 5px;
 }
 
 .lbl {
