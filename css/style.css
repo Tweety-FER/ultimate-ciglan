@@ -89,7 +89,7 @@ body {
 	margin-top: 10px;
 	width: 100%;
 	height: 280px;
-	background-color: rgba(200, 200, 200, 0.9);
+	background-color: #2fa4dd;
 	overflow: scroll;
 }
 
@@ -117,11 +117,7 @@ body {
 }
 
 #playbar img:hover {
-	margin-left: 3px;
-	margin-right: 3px;
-	margin-top: 6px;
-	width: 27px;
-	height: 27px;
+	background-color: rgba(255, 255, 255, 0.1);
 }
 
 #area {
@@ -132,11 +128,11 @@ body {
 }
 
 div.statecontainer {
-	height: 120px;
-	width: 120px;
+	height: 100px;
+	width: 100px;
 	position: absolute;
 	display: block;
-	margin: 5px;
+	-margin: 5px;
 	cursor: pointer;
 	z-index: 5;
 }
@@ -160,29 +156,29 @@ div.statecontainer span.statename {
 }
 
 div.statecontainer .circle {
-	width: 25px;
-	height: 25px;
+	width: 30px;
+	height: 30px;
 	position: absolute;
 }
 
 div.statecontainer .circle img {
-	width: 20px;
-	height: 20px;
+	width: 30px;
+	height: 30px;
 }
 
 div.statecontainer .a {
-	right: 15px;
-	top: 0px;
+	right: 30px;
+	top: -10px;
 }
 
 div.statecontainer .b {
-	right: 5px;
-	top: 20px;
+	right: -20px;
+	top: 40px;
 }
 
 div.statecontainer .c {
-	right: 0px;
-	top: 43px;
+	right: 30px;
+	bottom: -20px;
 }
 
 div.statecontainer .x {
@@ -291,6 +287,12 @@ div.statecontainer .circle .text {
 	position: absolute;
 }
 
+#actionmenu .crc {
+	position: absolute;
+	width: 30px;
+	height: 30px;
+}
+
 #actionmenu #halt {
 	bottom: 4px;
 	left: 75px;
@@ -352,21 +354,33 @@ div.statecontainer .circle .text {
 }
 
 .lbl {
-	color: white;
-	padding: 1em;
+	color: blue;
+	padding-bottom: 20px;
+	z-index: 100;
+	user-select: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+}
+
+._jsPlumb_connector, ._jsPlumb_endpoint, ._jsPlumb_overlay { 
+	z-index: 6; 
 }
 
 #score {
-	color: rgba(255,255,255,0.9);
-	font-size: 12pt;
-	margin-left: 2em;
-	margin-right: 2em;
+	color: white;
+	font-size: 18pt;
+	margin: 0 auto;
+	display: inline-block;
+	vertical-align: text-bottom;
 }
 
 #leftbuttons {
 	float: left;
+	margin-left: 1em;
 }
 
 #rightbuttons {
 	float: right;
+	margin-right: 1em;
 }

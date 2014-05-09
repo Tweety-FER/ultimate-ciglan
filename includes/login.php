@@ -3,7 +3,13 @@ session_start();
 
 include("config.php");
 if (isset($_SESSION['username'])) {
-	$error = ['code' => 125, 'description' => 'User is already logged in!'];
+	$error = ['succes' => False, 'redirect' => True, 'description' => 'User is already logged in!'];
+	echo json_encode($error);
+	die();
+}
+
+if(!checkParams()) {
+	$error = ['success' => False, 'redirect' => False, 'description' => 'Username must be 4-34 characters long,<br/> password must be at least 4 characters'];
 	echo json_encode($error);
 	die();
 }
@@ -15,42 +21,13 @@ $sql = mysql_query("SELECT * FROM User WHERE username = '$username' AND passhash
 $result = mysql_fetch_array($sql);
 
 if ($result['username'] !== $username) {
-	$error = ['description' => 'User entered wrong login info!'];
+	$error = ['success' => False, 'redirect' => False, 'description' => 'User entered wrong login info!'];
 	echo json_encode($error);
 	die();
 } else {
 	$_SESSION['username'] = $username;
-	//$_SESSION['user_id'] = $result['id'];
+	$_SESSION['userId'] = $result['id'];
 
-	$ok = ['result' => 'ok'];
+	$ok = ['success' => True, 'result' => 'ok'];
 	echo json_encode($ok);
 }
-
-/*
-/// Add validation for fields in both login and register pages
-<script>
-$('#form').validate(
-	rules : {
-		username: {
-			minlength: 2,
-			maxlength: 32
-		},
-		password: {
-			minlength: 4
-		}
-	},
-
-	messages : {
-		username: {
-			minlength: "Please enter at least 2 characters.",
-			maxlength: "Maximum number of characters exceeded."
-		},
-		password: {
-			minlength: "Please enter stronger password."
-		}
-	}
-)
-</script>
-*/
-
-?>

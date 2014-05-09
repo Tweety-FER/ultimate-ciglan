@@ -24,6 +24,7 @@
 
 $level = $_POST['level'];
 if ($level != null) {
+	include('includes/config.php')
 	$sql = mysql_query("INSERT INTO `Level`(`level`) VALUES('$level')");
 
 	if (true === $sql) {

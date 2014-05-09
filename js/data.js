@@ -1,31 +1,31 @@
+/*
+*	An enumeration describing the current state of the automaton engine.
+*/
+Status = {
+	'Play' : 0,
+	'Pause' : 1,
+	'Stop' : 2
+}
 
-	/*
-	*	An enumeration describing the current state of the automaton engine.
-	*/
-	var Status = {
-		'Play' : 0,
-		'Pause' : 1,
-		'Stop' : 2
-	}
+/*
+*	An enumeration of actions which the character can perform.
+*/
+Action = {
+	'Stop' : 0,
+	'Left' : 1,
+	'Right' : 2,
+	'JumpLeft' : 3,
+	'JumpRight' : 4,
+	'Jump' : 5
+}
 
-	/*
-	*	An enumeration of actions which the character can perform.
-	*/
-	var Action = {
-		'Stop' : 0,
-		'Left' : 1,
-		'Right' : 2,
-		'JumpLeft' : 3,
-		'JumpRight' : 4,
-		'Jump' : 5
-	}
+GameStatus = {
+	'Win' : 0,
+	'Lose' : 1,
+	'InProgress' : 2
+}
 
-	var GameStatus = {
-		'Win' : 0,
-		'Lose' : 1,
-		'InProgress' : 2
-	}
-
+{
 	/*
 	*	General purpose variables
 	*/
@@ -272,9 +272,9 @@
 			source : src,
 			target : dest,
 			overlays : [
-				[ "Label", {label : input + " : " + actionName(action), location: 0.5, cssClass : "lbl"}]
+				[ "Label", {label : input + " : " + actionName(action), location: 0.25, cssClass : "lbl"}]
 			],
-			anchors: ["Continuous", [ "Continuous", {faces : ["top", "left", "right"]}]] //dynamicAnchors]
+			anchors: ["Continuous", [ "Continuous", {faces : ["top", "left", "right"]}]]
 		});
 	}
 
@@ -342,15 +342,15 @@
 					<img class="automatonimg" src="img/State.png" id="' + state.Name + 'img" />\
 					<span class="statename">' + state.Name + '</span>\
 					<span id="' + state.Name + 'a" class="circle a">\
-						<img src="img/Circle.png">\
+						<img src="img/Circle.png" />\
 							<span class="text">a</span>\
 					</span>\
 					<span id="' + state.Name + 'b" class="circle b">\
-						<img src="img/Circle.png">\
+						<img src="img/Circle.png" />\
 							<span class="text">b</span>\
 					</span>\
 					<span id="' + state.Name + 'c" class="circle c">\
-						<img src="img/Circle.png">\
+						<img src="img/Circle.png" />\
 							<span class="text">c</span>\
 					</span>\
 					</div>');
@@ -439,7 +439,7 @@
 
 	function pause(e) {
 		e.preventDefault();
-		if(gameStatus === GameStatus.Lose) {
+		if(gameStatus === GameStatus.Lose || gameStatus == GameStatus.Win) {
 			stop(e);
 			return;
 		}
@@ -455,6 +455,9 @@
 		if (gameStatus === GameStatus.Lose) {
 			alert("He's dead, Jim!");
 			return;
+		} else if(gameStatus == GameStatus.Win) {
+			stop(e);
+			play(e);
 		}
 
 		if(currentState == undefined) {
@@ -552,6 +555,7 @@
 		$('body').on('click', function(e) {
 			active = null;
 			$('#actionmenu').hide();
+			normalizeButtons();
 		});
 
 		$('#actionmenu').hide();
@@ -597,8 +601,8 @@
 
 		instance = jsPlumb.getInstance({
 			Endpoint : ["Dot", {radius:2}],
-			PaintStyle : {strokeStyle:"#111", lineWidth: 2},
-			Connector: [ "Flowchart", {midpoint : 0.2, stub: 20, alwaysRespectStubs: true, cornerRadius: 15}],
+			PaintStyle : {strokeStyle:"blue", lineWidth: 2},
+			Connector: [ "Flowchart", {midpoint : 0.2, stub: 25, alwaysRespectStubs: true, cornerRadius: 10}],
 			ConnectorStyle:{ strokeStyle:"#5c96bc", lineWidth:2, outlineColor:"transparent", outlineWidth:4 },
 			ConnectionOverlays : [
 				[ "Arrow", { 
@@ -612,3 +616,4 @@
 			Container:"area"
 		});
 	}
+}
