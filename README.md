@@ -15,13 +15,7 @@ Check the tutorial for more. (Not yet written)
 The game itself is written in Javascript, CSS and HTML. The light-weight version (to be made available on github.io) contains only that code, modified
 slightly to require no backend. The full version also uses PHP and MySQL.
 
-The code relies on [jQuery][jq], [jQuery UI][jqui], [jQuery Mobile][jqmb], [Crafty][crafy] and [jsPlumb][jsp] to work.
-
-	[jq]: http://jquery.com
-	[jqui]: http://jqueryui.com
-	[jqmb]: http://jquerymobile.com
-	[crafty]: http://craftyjs.com
-	[jsp]: http://jsplumbtoolkit.com
+The code relies on [jQuery](http://jquery.com), [jQuery UI](http://jquery.com), [jQuery Mobile](http://jquery.com), [Crafty](http://craftyjs.com) and [jsPlumb](http://jsplumbtoolkit.com) to work.
 
 ## Level Design
 
@@ -29,17 +23,17 @@ Currently, the level design feature is not implemented.
 
 Levels can be imported manually via the admin page. By typing in valid JSON. The dimensions of the grid are 24x15 blocks (width x height).
 The format of the JSON must be:
-`
-{
-	title: "Level name",
-	inputstring: "aabcabbac" //Any length,
-	t : {
-		[0010101...],
-		[05...],
-		...
+
+	{
+		title: "Level name",
+		inputstring: "aabcabbac" //Any length,
+		t : {
+			[0010101...],
+			[05...],
+			...
+		}
 	}
-}
-`
+
 
 The numbers denote block types. The block types and their numbers are as following:   
 
@@ -60,10 +54,10 @@ The numbers denote block types. The block types and their numbers are as followi
 
 ## Authors
 
-[Luka Skukan][ls] - Automaton engine, design, auxiliaries
-Gabrijel Mrgan - The game screen and implemented actions, graphics, design
-[Belma Gutlić][bg] - The user management part of the backend, database
-Josip Vinković - Level selection part of the backend
+*	[Luka Skukan][ls] - Automaton engine, design, auxiliaries
+*	Gabrijel Mrgan - The game screen and implemented actions, graphics, design
+*	[Belma Gutlić][bg] - The user management part of the backend, database
+*	Josip Vinković - Level selection part of the backend
 
-[ls]: https://github.com/Tweety-FER "Tweety-FER"
-[bg]: https://github.com/morrigan "Morrigan"
+	[ls]: https://github.com/Tweety-FER "Tweety-FER"
+	[bg]: https://github.com/morrigan "Morrigan"
