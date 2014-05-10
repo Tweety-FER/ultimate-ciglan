@@ -54,10 +54,7 @@ The numbers denote block types. The block types and their numbers are as followi
 
 ## Authors
 
-*	[Luka Skukan][ls] - Automaton engine, design, auxiliaries
+*	[Luka Skukan](https://github.com/Tweety-FER ) - Automaton engine, design, auxiliaries
 *	Gabrijel Mrgan - The game screen and implemented actions, graphics, design
-*	[Belma Gutlić][bg] - The user management part of the backend, database
+*	[Belma Gutlić](https://github.com/morrigan) - The user management part of the backend, database
 *	Josip Vinković - Level selection part of the backend
-
-	[ls]: https://github.com/Tweety-FER "Tweety-FER"
-	[bg]: https://github.com/morrigan "Morrigan"
