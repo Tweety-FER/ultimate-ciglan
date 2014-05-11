@@ -7,6 +7,8 @@
 -- Server version: 5.5.31-0+wheezy1
 -- PHP Version: 5.4.15-1~dotdeb.2
 
+CREATE DATABASE IF NOT EXISTS ppij;
+USE ppij;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
@@ -27,13 +29,12 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE IF NOT EXISTS `HighScore` (
-  `id` int(12) NOT NULL,
+  `id` int(12) PRIMARY KEY AUTO_INCREMENT,
   `userId` int(12) NOT NULL,
   `levelId` int(12) NOT NULL,
   `timeScore` int(16) NOT NULL,
   `stateScore` int(16) NOT NULL,
-  `transitionScore` int(16) NOT NULL,
-  PRIMARY KEY (`id`)
+  `transitionScore` int(16) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -43,9 +44,8 @@ CREATE TABLE IF NOT EXISTS `HighScore` (
 --
 
 CREATE TABLE IF NOT EXISTS `Level` (
-  `id` int(12) NOT NULL,
-  `level` text NOT NULL,
-  PRIMARY KEY (`id`)
+  `id` int(12) PRIMARY KEY AUTO_INCREMENT,
+  `level` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -55,10 +55,9 @@ CREATE TABLE IF NOT EXISTS `Level` (
 --
 
 CREATE TABLE IF NOT EXISTS `User` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) PRIMARY KEY AUTO_INCREMENT,
   `passhash` varchar(64) NOT NULL,
-  `username` varchar(64) NOT NULL,
-  PRIMARY KEY (`id`)
+  `username` varchar(64) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --

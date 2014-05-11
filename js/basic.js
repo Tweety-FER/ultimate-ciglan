@@ -47,10 +47,10 @@
 		}).done(function (msg) {
 			if (msg.success) {
 				f();
-				window.location = "/game.html";
+				window.location = "/levels.php";
 			} else {
 				if(msg.redirect) {
-					window.location = "/game.html";
+					window.location = "/levels.php";
 				} else {
 					$('#error').html(msg.description);
 				}
@@ -59,10 +59,10 @@
 	}
 
 	function ajaxLogin() {
-		doAjax('/includes/login.php', function(){});
+		doAjax('/login.php', function(){});
 	}
 
 	function ajaxRegister() {
-		doAjax('/includes/register.php', function() {alert('Registration successful')});
+		doAjax('/register.php', function() {alert('Registration successful')});
 	}
 }

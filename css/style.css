@@ -3,6 +3,47 @@ body {
 	background: #DCDCB7 url(../img/bg.gif);
 }
 
+.lista h1{   
+    font-family:Georgia,serif,Times; 
+    margin-left:auto;
+    margin-right:auto;
+    width:17%;
+    color:rgb(28,28,58); 
+}
+
+.lista ul  { 
+    list-style:none; 
+    margin-left:auto;
+    margin-right:auto;
+    width:25%;
+}
+
+.lista ul li { 
+    font-family:Georgia,serif,Times; 
+    font-size:18px; 
+} 
+
+.lista ul li a { 
+    display:block; 
+    width:300px; 
+    height:28px; 
+    background-color: rgb(28,28,58); 
+    border-left:5px solid #222; 
+    border-right:5px solid #222; 
+    padding-left:10px;
+    text-decoration:none; 
+    color:#FFF;
+}
+
+.lista ul li a:hover {  
+    -moz-transform:rotate(-5deg); 
+    -moz-box-shadow:10px 10px 20px #000000;
+    -webkit-transform:rotate(-5deg); 
+    -webkit-box-shadow:10px 10px 20px #000000;
+    transform:rotate(-5deg); 
+    box-shadow:10px 10px 20px #000000; 
+}
+
 .letter {
 	font-size: 1.5em;
 	margin-right: 5px;
