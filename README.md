@@ -1,12 +1,12 @@
-# ultimate-ciglan
+# Mealy Another Adventure 
 
 ## Summary
 
-Ultimate-Cignal is a simple online arcade game in which the player controls the actions of the character using deterministic finite automata.  
+Mealy Another Adventure is a simple online arcade game in which the player controls the actions of the character using deterministic finite automata. It is also a bad pun. 
 
 
 The player thus solves simple tasks like collecting keys and skipping over pits with automata instead of the traditional keyboard or swipes.
-Each level features the level itself, as well as default input string. The automata are used to parse the input string and produce actions.
+Each level features the level itself, as well as default input string. The automata are used to parse the input string and produce actions.  
 The automata are Mealy automata, and as such for each state and input character, they transition into a new state and produce an action.
 Check the tutorial for more. (Not yet written)
 
@@ -26,11 +26,11 @@ The format of the JSON must be:
 
 	{
 		title: "Level name",
-		inputstring: "aabcabbac" //Any length,
+		inputstring: "aabcabbac", //Any length
 		t : {
-			[0010101...],
+			[0010101...], //Each row is 24 elements
 			[05...],
-			...
+			... // 15 rows altogether
 		}
 	}
 
