@@ -42,8 +42,8 @@ $level = json_decode($level['level']);
         <script type="text/javascript" src="js/game.js"></script>
         <script type="text/javascript" src="js/components.js"></script>
   <script>
+    Game.level.t = <?php echo json_encode($level->t); ?>;
     window.addEventListener('load', Game.start);
-    <?php echo $level->t; ?>
   </script>
 </HEAD>
 <BODY>

@@ -23,10 +23,9 @@ $levels = mysql_query("SELECT * FROM level");
                 <h1>Lista levela</h1>
                 <ul>
                 <?php
-                $br=0;
                 while ($lev=mysql_fetch_array($levels)){
-                    $br++;
-                    echo "<li><a href='level.php?id=$lev[id]'>Level $br</a></li>";
+                    $leveldata = json_decode($lev['level']);
+                    echo "<li><a href='level.php?id=$lev[id]'>Level $leveldata->title</a></li>";
                         
                 } 
                 ?>

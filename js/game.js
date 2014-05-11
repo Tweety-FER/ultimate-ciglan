@@ -202,7 +202,6 @@ Game = {
 
     // Initialize and start our game
     start: function() {
-
         Crafty.init(Game.width(), Game.height());
         Crafty.background('#4fc4ff url(img/bck.png)');
 
@@ -251,7 +250,7 @@ Game = {
         Crafty.scene("loading");
 
         Crafty.scene("main", function(){
-            Game.level.t = l.t;
+            //Game.level.t = leveldata.t;
             Game.levelLoad();
             var ticker = Crafty.e("Ticker");
         });
