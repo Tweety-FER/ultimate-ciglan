@@ -52,6 +52,10 @@ The numbers denote block types. The block types and their numbers are as followi
 *	Spike (Rightwards) : 12
 *	Player : 13
 
+### Sample Levels
+
+The repository contains two sample levels. They can be found in the levels/ dir.
+
 ## Authors
 
 *	[Luka Skukan](https://github.com/Tweety-FER ) - Automaton engine, design, auxiliaries
