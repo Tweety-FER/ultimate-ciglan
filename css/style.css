@@ -1,9 +1,9 @@
 body {
 	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
-	background: #DCDCB7 url(../img/bg.gif);
+	background: #f9f9f9;
 }
 
-.lista h1{   
+.lista h1 {   
     font-family:Georgia,serif,Times; 
     margin-left:auto;
     margin-right:auto;
@@ -11,7 +11,7 @@ body {
     color:rgb(28,28,58); 
 }
 
-.lista ul  { 
+.lista ul { 
     list-style:none; 
     margin-left:auto;
     margin-right:auto;
@@ -93,11 +93,10 @@ body {
 	position: relative;
 	margin: auto;
 	width: 480px;
-	height: 330px;
+	height: 370px;
 	border: 1px solid black;
 	background-color: #2fa4dd;
-	border-bottom-left-radius: 15px;
-	border-bottom-right-radius: 15px;
+	border-radius: 15px;
 }
 
 #screen {
@@ -122,6 +121,7 @@ body {
 
 #cr-stage {
 	margin: auto;
+	margin-top: 40px;
 }
 
 #automatons {
@@ -130,8 +130,40 @@ body {
 	margin-top: 10px;
 	width: 100%;
 	height: 280px;
-	background-color: #2fa4dd;
+	background-color: #E5EEFF;
 	overflow: scroll;
+}
+
+#titles {
+	width: 480px;
+	height: 40px;
+	margin: 0 auto;
+	position: absolute;
+	top: 0;
+	background-color: rgba(28, 28, 28, 0.85);
+	display: inline-block;
+	text-align: center;
+	border-top-left-radius: 15px;
+	border-top-right-radius: 15px;
+}
+
+#titles #levellist {
+	float: left;
+	margin-left: 15px;
+}
+
+#titles #tutorial {
+	float: right;
+	margin-right: 15px;
+}
+
+#title {
+	color: white;
+	font-size: 16pt;
+	margin: 0 auto;
+	display: inline-block;
+	vertical-align: text-bottom;
+	margin-top: 5px;
 }
 
 #playbar {
@@ -148,7 +180,7 @@ body {
 	border-bottom-right-radius: 15px;
 }
 
-#playbar img {
+#playbar img, #titles img{
 	display: inline-block;
 	margin-top: 10px;
 	margin-right: 5px;
@@ -157,7 +189,7 @@ body {
 	height: 25px;
 }
 
-#playbar img:hover {
+#playbar img:hover, #titles img:hover {
 	background-color: rgba(255, 255, 255, 0.1);
 }
 
@@ -173,9 +205,21 @@ div.statecontainer {
 	width: 100px;
 	position: absolute;
 	display: block;
-	-margin: 5px;
+	background-image: url('/img/State.png');
 	cursor: pointer;
 	z-index: 5;
+}
+
+div.statecontainer:hover {
+	background-image: url('/img/StateHover.png');
+}
+
+div .statecontainer.stateon {
+	background-image: url('/img/StateOn.png');
+}
+
+div .statecontainer.stateon:hover {
+	background-image: url('/img/StateOnHover.png');
 }
 
 div.statecontainer img {
@@ -197,29 +241,29 @@ div.statecontainer span.statename {
 }
 
 div.statecontainer .circle {
-	width: 30px;
-	height: 30px;
+	width: 25px;
+	height: 25px;
 	position: absolute;
 }
 
 div.statecontainer .circle img {
-	width: 30px;
-	height: 30px;
+	width: 25px;
+	height: 25px;
 }
 
 div.statecontainer .a {
-	right: 30px;
-	top: -10px;
+	right: 37px;
+	top: -9px;
 }
 
 div.statecontainer .b {
-	right: -20px;
-	top: 40px;
+	right: -10px;
+	top: 38px;
 }
 
 div.statecontainer .c {
-	right: 30px;
-	bottom: -20px;
+	right: 37px;
+	bottom: -9px;
 }
 
 div.statecontainer .x {
@@ -395,7 +439,7 @@ div.statecontainer .circle .text {
 }
 
 .lbl {
-	color: blue;
+	color: #006666;
 	padding-bottom: 20px;
 	z-index: 100;
 	user-select: none;
@@ -412,6 +456,7 @@ div.statecontainer .circle .text {
 	color: white;
 	font-size: 18pt;
 	margin: 0 auto;
+	margin-top: 5px;
 	display: inline-block;
 	vertical-align: text-bottom;
 }

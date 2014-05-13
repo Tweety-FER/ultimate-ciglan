@@ -26,7 +26,12 @@ The format of the JSON must be:
 
 	{
 		title: "Level name",
-		inputstring: "aabcabbac", //Any length
+		inputstring: "aabcabbac", //Any length,
+		"par": { //Number of x under which player must perform to score
+       		"states" : 8, //Player scores for states if under 8
+        	"steps" : 16, //Player scores for steps (actions) if under 16 were performed
+        	"transitions": 16 //Player scores for transitions if less than 16 were defined
+        },
 		t : {
 			[0010101...], //Each row is 24 elements
 			[05...],
@@ -58,7 +63,7 @@ The repository contains two sample levels. They can be found in the levels/ dir.
 
 ## Authors
 
-*	[Luka Skukan](https://github.com/Tweety-FER ) - Automaton engine, design, auxiliaries
-*	Gabrijel Mrgan - The game screen and implemented actions, graphics, design
+*	[Luka Skukan](https://github.com/Tweety-FER) - Automaton engine, design, auxiliaries
+*	[Gabrijel Mrgan](https://github.com/ekvadior) - The game screen and implemented actions, sound, graphics, design
 *	[Belma Gutlić](https://github.com/morrigan) - The user management part of the backend, database
-*	Josip Vinković - Level selection part of the backend
+*	Josip Vinković - Level selection part of the backend and level list fronted

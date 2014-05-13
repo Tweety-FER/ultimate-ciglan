@@ -1,6 +1,7 @@
 <?php
 
 session_start();
+
 if (! isset($_SESSION['userId'])) {
     header('Location: index.html');
     die();
@@ -15,7 +16,8 @@ $levels = mysql_query("SELECT * FROM level");
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" type="text/css" href="css/style.css"/>
+        <title>List of Levels</title>
+        <link rel="stylesheet" type="text/css" href="/css/style.css"/>
     </head>
     <body>
         

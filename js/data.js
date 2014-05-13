@@ -66,6 +66,8 @@ GameStatus = {
 
 	var deletingState = false;
 
+	var steps = 0;
+
 
 	/*
 	*	Gets the action name from the action enum
@@ -147,9 +149,8 @@ GameStatus = {
 		var ret = {'x' : x, 'y': y};
 		var dist = Infinity;
 
-		$('.automatonimg').each(function(i) {
-			//$(this).css('background-color', 'red');
-			var position = $(this).parent().position();
+		$('.statecontainer').each(function(i) {
+			var position = $(this).position();
 
 			var distance = Math.floor(Math.sqrt(
 				Math.pow(position.left - x, 2),
@@ -189,6 +190,7 @@ GameStatus = {
 		e.preventDefault();
 		e.stopPropagation();
 
+
 		if(deletingState) {
 			var children = $(this).children();
 
@@ -212,6 +214,8 @@ GameStatus = {
 		} else {
 			hideButtons();
 			$(this).find('.circle').css('opacity', '1');//.fadeIn();
+			$('.stateon').removeClass('stateon');
+			$(this).addClass('stateon');
 		}
 	}
 
@@ -220,8 +224,7 @@ GameStatus = {
 	*/
 	function normalizeButtons() {
 		var circles = $('.circle img');
-		circles.css('width', '20px');
-		circles.css('height', '20px');
+		circles.attr('src', 'img/Circle.png')
 		$('.circle').css('font-weight', 'normal');
 	}
 
@@ -252,7 +255,7 @@ GameStatus = {
 	*/
 	function arrowConnect(from, input, to, action) {
 		var src = from.Name + input;
-		var dest = to.Name + "img";
+		var dest = to.Name;
 
 		var oldEndpoints = instance.getEndpoints(src);
 
@@ -272,7 +275,7 @@ GameStatus = {
 			source : src,
 			target : dest,
 			overlays : [
-				[ "Label", {label : input + " : " + actionName(action), location: 0.25, cssClass : "lbl"}]
+				[ "Label", {label : actionName(action), location: 0.35, cssClass : "lbl"}]
 			],
 			anchors: ["Continuous", [ "Continuous", {faces : ["top", "left", "right"]}]]
 		});
@@ -305,9 +308,10 @@ GameStatus = {
 	*/
 	function resizeIcons(me) {
 		normalizeButtons();
-		me.find('img').css('width', '22px');
-		me.find('img').css('height', '22px');
+		me.find('img').attr('src', 'img/CircleBound.png');
 		me.css('font-weight', 'bolder');
+		//var pid = me.parent().attr('id');
+		//var next = states[pid].GetTransition(me.find('.text').html().trim()).next;
 	}
 
 	/*
@@ -339,7 +343,6 @@ GameStatus = {
 
 		//The html of a state, with id generated according to the state name
 		var div = $('<div id="' + state.Name + '" class="statecontainer">\
-					<img class="automatonimg" src="img/State.png" id="' + state.Name + 'img" />\
 					<span class="statename">' + state.Name + '</span>\
 					<span id="' + state.Name + 'a" class="circle a">\
 						<img src="img/Circle.png" />\
@@ -488,6 +491,7 @@ GameStatus = {
 		currentState = undefined;
 		lowercaseInput();
 		letterIndex = 0;
+		steps = 0;
 		Crafty.trigger("StopSimulation", '');
 	}
 
@@ -500,24 +504,49 @@ GameStatus = {
 		} else if(status == Status.Stop) {
 			currentState = findFirstAvailableState();
 			letterIndex = 0;
+			steps = 0;
 			return;
 		} 
 
+		steps += 1;
 		highlightCurrentLetter($('#letter' + letterIndex));
+
 		var input = inputStr.charAt(letterIndex).toLowerCase();
+
 		var transition = currentState.GetTransition(input);
 		currentState = transition.next != undefined ? transition.next : currentState;
 		queue.push(transition.action != undefined ? transition.action : Action.Stop);
 
-		$('#'+currentState.Name).effect('bounce', {times : 3}, 450);
-
+		$('.stateon').removeClass('stateon');
+		var self = $('#' + currentState.Name);
+		self.addClass('stateon');
 		letterIndex = (letterIndex + 1) % inputStr.length;
 
 		Crafty.trigger('Step', queue.shift());
 	}
 
+	function calculateScore() {
+		var statesize = Object.keys(states).length;
+
+		var statescore = 1000 * Math.max(0, par.states - statesize);
+		var stepscore = 100 * Math.max(0, par.steps - steps);
+
+		publishScore(statescore, stepscore, 0);
+		return statescore + stepscore;
+	}
+
+	function publishScore(state, step, trans) {
+		$.ajax({
+			url: 'score.php',
+			type: 'POST',
+			data: {'lid': lid, 'step' : step, 'state' : state, 'transition' : trans},
+			dataType : 'json'
+		});
+	}
+
 	function success() {
 		gameStatus = GameStatus.Win;
+		$('#score').html(calculateScore());
 	}
 
 	function failure() {
@@ -556,6 +585,7 @@ GameStatus = {
 			active = null;
 			$('#actionmenu').hide();
 			normalizeButtons();
+			$('.stateon').removeClass('stateon');
 		});
 
 		$('#actionmenu').hide();
@@ -601,9 +631,9 @@ GameStatus = {
 
 		instance = jsPlumb.getInstance({
 			Endpoint : ["Dot", {radius:2}],
-			PaintStyle : {strokeStyle:"blue", lineWidth: 2},
-			Connector: [ "Flowchart", {midpoint : 0.2, stub: 25, alwaysRespectStubs: true, cornerRadius: 10}],
-			ConnectorStyle:{ strokeStyle:"#5c96bc", lineWidth:2, outlineColor:"transparent", outlineWidth:4 },
+			PaintStyle : {strokeStyle:"#027777", lineWidth: 2},
+			Connector: [ "Flowchart", {midpoint : 0.5, stub: 15, alwaysRespectStubs: true, cornerRadius: 15}],
+			ConnectorStyle:{ strokeStyle:"#027777", lineWidth:2, outlineColor:"transparent", outlineWidth:4 },
 			ConnectionOverlays : [
 				[ "Arrow", { 
 					location:1,
