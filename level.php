@@ -5,7 +5,7 @@ if (! isset($_SESSION['userId'])) {
     die();
 }
 if (!isset($_GET['id'])){
-    header('Location: ListaLevela.php');
+    header('Location: levels.php');
     die();
 }
 $id=$_GET['id'];
