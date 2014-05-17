@@ -152,6 +152,13 @@
 			<p>
 				Alright, everything is ready, you're winning this! You click play and everything starts moving. Transitions are happening, the brick is moving, you've got the key aaaand... you're dead. Gee, good job. What went wrong? At which step did you mess up? Well, to help you keep track of that, the current letter and the current state are highlighted at each step. You can keep track of the current letter in the input string because it is uppercased, as shown in Image 2. As for the current state, it will become a shade of green and do a little bounce for you. Look at it go!
 			</p>
+			<h3>Scoring</h3>
+			<p>
+				Nice work, you've completed a level! Now comes the scoring. There are three elements to scoring - the number of states used, the number of transitions defined (implicit/default transitions are not counted) and the number of steps performed. Each level has a &quot;par&quot; value for each. If you perform under it, you get points for that element. If you are on or above par, you get no points. For each state under par you receive 1000 points. For each step under par you receive 100 points. For each transition under par you receive 50 points. The final score is the sum of these three.
+			</p>
+			<p>
+				An example: You are playing a level which has par defined as: {states: 6, steps: 20, transitions: 12}. You managed to solve the level using 5 states and 10 transitions, in 15 steps. You get 1000 points for the state, 500 points for the steps and 100 points for the transitions - 1600 whole points! But you can beat that, I believe in you! Go on, I'm sure there's a more efficient solution!
+			</p>
 			<h2>Finishing Remarks</h2>
 			<p>
 				Now you know just about everything there is to know about playing this game. Good luck and have fun! If you want to report a bug, please add an Issue on <a href="https://github.com/Tweety-FER/ultimate-ciglan">GitHub</a>. You can also <a href="luka.skukan@fer.hr">e-mail me</a> and ask anything you want. Seriously, anything.

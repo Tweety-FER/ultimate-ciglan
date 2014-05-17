@@ -86,7 +86,6 @@ GameStatus = {
 	*	Finds the first state, using numerical order.
 	*/
 	function getInitialState() {
-		console.log(initialId in states);
 		if (initialId in states) {
 			return states[initialId];
 		}
@@ -103,6 +102,24 @@ GameStatus = {
 	*/
 	function nextName() {
 		return "S" + nameNumber++;
+	}
+
+	/*
+	*	Counts the user-defined transitions
+	*/
+	function countTransitions() {
+		var trans = 0;
+		for(var key in states) {
+			var state = states[key];
+			for(var t in state.Transitions) {
+				var tr = state.Transitions[t];
+				if(tr !== undefined && tr.next !== undefined && tr.action !== undefined) {
+					trans++;
+				}
+			}
+		}
+
+		return trans;
 	}
 
 	/*
@@ -135,13 +152,6 @@ GameStatus = {
 		this.GetTransition = function(input) {
 			return this.Transitions[input];
 		};
-	}
-
-	/*
-	*	Hides the input-character-selection buttons
-	*/
-	function hideButtons() {
-//		$('.circle').css('opacity', '0');
 	}
 
 	/*
@@ -224,8 +234,6 @@ GameStatus = {
 			newState = states[$(this).attr('id')];		
 			placeMenu(e);
 		} else {
-			//hideButtons();
-			//$(this).find('.circle').css('opacity', '1');//.fadeIn();
 			$('.stateon').removeClass('stateon');
 			$(this).addClass('stateon');
 		}
@@ -377,7 +385,6 @@ GameStatus = {
 		$('#area').append(div);
 
 		//Setting the initial visual properties
-		hideButtons();
 
 		jsPlumb.draggable(div);
 
@@ -496,7 +503,6 @@ GameStatus = {
 			}
 		}
 
-		hideButtons();
 		status = Status.Play;
 		enableImage();
 		execute();
@@ -548,16 +554,17 @@ GameStatus = {
 
 	function calculateScore(oldScore) {
 		var statesize = Object.keys(states).length;
+		var userTrans = countTransitions();
 
 		var statescore = 1000 * Math.max(0, par.states - statesize);
 		var stepscore = 100 * Math.max(0, par.steps - steps);
-		var transscore = 10 * 0;
+		var transscore = 50 * Math.max(0, par.transitions - userTrans);
 		var score = statescore + stepscore + transscore;
 
 		if (oldScore >= score) return oldScore;
 
 		publishScore(statescore, stepscore, transscore);
-		return statescore + stepscore;
+		return statescore + stepscore + transscore;
 	}
 
 	function publishScore(state, step, trans) {
@@ -637,7 +644,6 @@ GameStatus = {
 		$('#pause').on('click', pause)
 
 		$('#area').on('click', function(e) {
-			hideButtons(); 
 			active = null;
 			if(addingState === true) {
 				addingState = false;
