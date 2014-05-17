@@ -1,0 +1,161 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Tutorial</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link rel="stylesheet" type="text/css" href="/css/style.css"/>
+		<script type="text/javascript" src="js/jquery-2.0.3.min.js"></script>
+		<script type="text/javascript">
+			window.onload = function() {
+				$('#textbody h2').after('<hr/>');
+				var i = 1;
+				$('.imagebox img').each(function() {
+					$(this).after('<br/><span class="caption"> Image ' + i + ' : ' + $(this).attr('alt') + '</span>');
+					i++;
+				});
+			};
+		</script>
+	</head>
+	<body>
+		<div class="headertitle">Tutorial</div>
+		<div class="headerlist">
+			<ul><a href="levels.php"><li>Back to Level Selection</li></a></ul>
+		</div>
+		<br/>
+		<div id="textbody">
+			<h2>Introduction</h2>
+			<p>
+				Welcome to Mealy Another Adventure. This game combines the concepts of old arcade games of the authors&#39; chilhoods with the principles of finite automata. You must use your knowledge of Deterministic Finite Automata (DFA) to help Mr. B. B. Brickley on his grand adventure.
+			</p>
+			<p>
+				Mr. Brickley always knew he was made of firmer brick than his fellow wall-mates. He always knew he was different. One day, he decided to leave the wall of his youth on go on an adventure. However, Mr. Brickley didn't know much about adventures, so he decided that collecting keys and going through doors while avoiding spikes was adventure enough for him, thank you very much. <b>You</b> are tasked with not judging him and helping him in this task!
+			</p>
+			<p>
+				Mr. Brickley progresses through a series of levels, each featuring a key to collect, a door to go through and numerous obstacles. Spikes are out to get him (yes, him specifically), blocks crumble under his brick-feet and chasms open up before him. Each level features an input string from the alphabet {a, b, c}. You must construct automata to parse these strings and control Mr. Brickley's actions through them.
+			</p>
+
+			<h2>The User Interface</h2>
+			<p>
+				The top of the user interface is shown below, with numbered sections:
+			</p>
+			<p class="imagebox">
+				<img src="/img/tutorial/ui.png" alt="The User Interface" />
+			</p>
+			<p>
+				Section <b>1</b> is the Back button, which returns the user to the level selection screen. You can click it if you get bored with the current level.
+			</p>
+			<p>
+				Section <b>2</b> is the level's title. There is power in names.
+			</p>
+			<p>
+				Section <b>3</b> is the Tutorial button. You can click it to get back to this screen if something is unclear during the game. Be careful, though! You progress will be erased.
+			</p>
+			<p>
+				Section <b>4</b> is the game screen. This is where the interesting stuff happens. You can see the level and its elements, as well as the renowned Mr. Brickley here. When he walks, jumps and collects keys, this is where you see it happen.
+			</p>
+			<p>
+				Section <b>5</b> is where the input string is displayed. This is the string you need to parse with your automata. The string is circular, so if you just got to the end of it, the next character in the screen is actually the first character. So the string "abc" is actually "abcabcabc..."! How will you know what character is currently being parsed? Easy! It will be uppercased, like this:
+			</p>
+			<p class="imagebox">
+				<img src="/img/tutorial/toggledinput.png" alt="Look ma'! Being parsed!" />
+			</p>
+			<p>
+				Section <b>6</b> (the bit in the ellipse) contains the <em>control buttons</em>. With them you can start, pause and stop (restart) the execution of the automata. If a button it inactive, it will be a boring grey. If it's active, on the other hand, it will take on a lively colour: green for Play, yellow for Pause and red for Stop. The stop button is also used to restart the game if you've completed the level or led Mr. Brickley to an early demise.
+			</p>
+			<p>
+				Section <b>7</b> shows your current highscore for this level. Every user can have one highscore for each level. The scoring is described later, so you'll just have to wait.
+			</p>
+			<p>
+				Section <b>8</b> contains the <em>game</em> buttons, as well as the sound toggle button. The first button is the <em>Add State</em> button. Clicking on it makes it green and when it's green you can add new states by clicking on the Automaton Area (Section <b>9</b> - Don't be confused, we'll get to that in a second). The second button is the <em>Delete State</em> button. When it's toggled, it goes a bright red and that means you can click on an existing state and delete it forever. Harsh, man. The last button is the <em>Sound Toggle</em> button. Mr. Brickley is all about grunting and maybe you eventually get annoyed with it. Clicking on this button turns the sound on and off. It's on by default, in case you didn't notice.
+			</p>
+			<p>
+				<cite>Wait, wait, you keep talking about automata, but I don't see any here!</cite> you might be saying. Or maybe not. How should I know, I'm not even there with you? Well, let me explain. There is another section in the game. Just below the screen I just showed you, you should see a faintly bluish area. This is Section <b>9</b>, the <em>Automaton Area</em>. This is where you add states, where you delete them from and where you connect them. Here, let me show you a piece of Section 9 with some states in it:
+			</p>
+			<p class="imagebox">
+				<img src="/img/tutorial/automata.png" alt="Section 9 and a couple of states" />
+			</p>
+
+			<h2>Playing the Game</h2>
+			<h3>Connecting the States</h3>
+			<p>
+				Alright, let's say you've used the <em>Add State</em> button to add a few states and they're just hanging around there, being useless. Well, that's all going to change! See, each state can have <em>transitions</em>!
+			</p>
+
+			<p>
+				What is a transition? Well, let me try to explain. When you are <b>in</b> a state (that state is active), it can cross into another state and perform an action. Let us say you are in a state called <b>S0</b> - you can see the state name in the middle of it. For each letter of the input alphabet (letter a, b and c in our case), you can define one of these transitions. Let us pick the letter &quot;a&quot; for this demonstration. Once you have picked a state to transition <em>from</em> and a character to transition <em>for</em>, you also need to pick a goal state. See, a transition <em>transits</em> into a state. Weird, I know. So let's pick state <b>S1</b> as our transition goal. We can also go from state S0 right back into state S0 if that's what we want. However, we're not done yet! Just switching from one state to the other would not do us much good. We are using a special version of automata called the Mealy automata. When you define a transition you can also define an <em>Action</em> to be performed. Let us say you picked the action <b>Go Right</b>.
+			</p>
+			<p>
+				Now we have our example transition. We transition <b>from</b> state S0, <b>into</b> state S1, <b>for</b> character &quot;a&quot;, performing the <b>action</b> Go Right. Let us introduce a shorthand notation for transitions as: (from, for) &rarr; (to, action). We can now represent this transition as (S0, a) &rarr; (S1, Go Right). The actions our engine currently supports are: <br/>
+				<ul>
+					<li>Stop</li>
+					<li>Go Left</li>
+					<li>Go Right</li>
+					<li>Jump</li>
+					<li>Jump Left</li>
+					<li>Jump Right</li>
+				</ul>
+			</p>
+			<p>
+				Having that in mind, let us see what connections are defined in our old friend, Image 3:
+				<ul>
+					<li>(S0, b) &rarr; (S0, Jump Right)</li>
+					<li>(S0, c) &rarr; (S1, Go Left)</li>
+					<li>(S1, a) &rarr; (S0, Go Left)</li>
+				</ul>
+			</p>
+			<p>
+				As a sidenote, not all automata, not even all deterministic finite automata are like this. Mealy automata are special. Was this a different game, let us call it &quot;Even Moore Adventuring&quot;, the mechanisms involved would be quite different. You can learn more about the <a href="http://en.wikipedia.org/wiki/Mealy_machine">Mealy</a> and <a href="http://en.wikipedia.org/wiki/Moore_machine">Moore</a> automata (or machines) on Wikipedia.
+			</p>
+			<p>
+				So, how can you create transitions? Well, first, you need to click on one of the circles containing letters &quot;a&quot;, &quot;b&quot; or &quot;c&quot; surrounding the state. Let us click on state S0, circle &quot;a&quot; to start defining our transition. The circle should now go orange like this:
+			</p>
+			<p class="imagebox">
+				<img src="/img/tutorial/activecircle.png" alt="Selecting an input character" />
+			</p>
+			<p>
+				Our transition is now partially defined as (S0, a) &rarr; (?, ?). We still need to define the goal state and the action. We define a goal state by clicking on it (while there is an orange circle present). Let's click on state S1. That makes our transition (S0, a) &rarr; (S1, ?). We still need to define the action. Luckily, when we clicked on the state S1, an action selection menu popped up!
+			</p>
+			<p class="imagebox">
+				<img src="/img/tutorial/actionmenu.png" alt="The action selection menu" />
+			</p>
+			<p>
+				This menu graphically displays the actions listed above. Just click on one of them to define an action and complete our transition definition. We'll pick the action <em>Jump</em> and complete our transition definition as (S0, a) &rarr; (S1, Jump). An arrow appears, marking the transition between the two states.
+			</p>
+			<p class="imagebox">
+				<img src="/img/tutorial/connection.png" alt="Our transition" />
+			</p>
+			<p>
+				At any point during the process of adding a transition, you can change your mind and stop adding the transition by clicking on a blank part of Section 9. You might notice that only one transition was defined here - (S0, a) &rarr; (S1, Jump). What happens if we are in S0 and the input character is &quot;b&quot; or &quot;c&quot;? Well, a default transition is performed. The default transition transitions right back into the same state and performs the action Stop (equivalent to just standing there). So, S0 actually has three transitions defined:<br/>
+				<ul>
+					<li>(S0, a) &rarr; (S1, Jump)</li>
+					<li>(S0, b) &rarr; (S0, Stop)</li>
+					<li>(S0, c) &rarr; (S0, Stop)</li>
+				</ul>
+			</p>
+			<h3>Starting our Simulation</h3>
+			<p>
+				Alright, you've connected some states and now you want to start the simulation and see if you solution enables Mr. Brickley to win. You've more or less wrapped your mind around the idea of transitions. But... which state comes first? You need to be in a state to transition into another state, right?
+			</p>
+			<p>
+				You're absolutely correct! Wow, you're smarter than I thought, good work! The concept you're looking for is called the <em>Initial</em> or <em>Starting</em> state. You simply need to start somewhere. Well, you don't actually have to define a starting state. If you don't, a state with the smallest index will be picked. That means if your states are S5, S2 and S7 (you've deleted the states inbetween), state S2 will be picked because 2 is smaller than both 5 and 7.
+			</p>
+			<p>
+				Sometimes, however, this is not good enough. You know you'd win if only you started from state S5 instead of state S2! Well, you can do that, too! Just double-click on a state and it starts looking a bit puffy. This is your new initial state! Your simulation will start from that state now.
+			</p>
+			<p class="imagebox">
+				<img src="/img/tutorial/initial.png" alt="A user-defined initial state" />
+			</p>
+			<p>
+				You can always change your initial state by double-clicking on another state. If you delete your current initial state, the game will revert back to chosing the state with the smallest index as the initial state. So be careful!
+			</p>
+			<h3>Clicking Play</h3>
+			<p>
+				Alright, everything is ready, you're winning this! You click play and everything starts moving. Transitions are happening, the brick is moving, you've got the key aaaand... you're dead. Gee, good job. What went wrong? At which step did you mess up? Well, to help you keep track of that, the current letter and the current state are highlighted at each step. You can keep track of the current letter in the input string because it is uppercased, as shown in Image 2. As for the current state, it will become a shade of green and do a little bounce for you. Look at it go!
+			</p>
+			<h2>Finishing Remarks</h2>
+			<p>
+				Now you know just about everything there is to know about playing this game. Good luck and have fun! If you want to report a bug, please add an Issue on <a href="https://github.com/Tweety-FER/ultimate-ciglan">GitHub</a>. You can also <a href="luka.skukan@fer.hr">e-mail me</a> and ask anything you want. Seriously, anything.
+			</p>
+		</div>
+	</div>
+</html>

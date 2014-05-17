@@ -34,15 +34,13 @@ $level = json_decode($level['level']);
         <script type="text/javascript" src="js/jquery-ui-1.10.4.custom.min.js"></script>
         <link rel="stylesheet" type="text/css" href="css/jquery-ui-1.10.4.custom.min.css" />
         <script type="text/javascript" src="js/data.js"></script>
-        <!--<meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css">
-        <script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>-->
         <script src="js/jquery.jsPlumb-1.4.1-all-min.js"></script>
         <script type="text/javascript" src="js/crafty.js"></script>
         <script type="text/javascript" src="js/game.js"></script>
         <script type="text/javascript" src="js/components.js"></script>
   <script>
     var par = <?php echo json_encode($level->par); ?>;
+    var lid = <?php echo $id; ?>;
     Game.level.t = <?php echo json_encode($level->t); ?>;
     window.addEventListener('load', Game.start);
   </script>

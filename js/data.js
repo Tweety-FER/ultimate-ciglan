@@ -68,6 +68,8 @@ GameStatus = {
 
 	var steps = 0;
 
+	var initialId = undefined;
+
 
 	/*
 	*	Gets the action name from the action enum
@@ -83,7 +85,12 @@ GameStatus = {
 	/*
 	*	Finds the first state, using numerical order.
 	*/
-	function findFirstAvailableState() {
+	function getInitialState() {
+		console.log(initialId in states);
+		if (initialId in states) {
+			return states[initialId];
+		}
+
 		for(var s in states) {
 			return states[s];
 		}
@@ -134,8 +141,7 @@ GameStatus = {
 	*	Hides the input-character-selection buttons
 	*/
 	function hideButtons() {
-		//$('.circle').fadeOut();
-		$('.circle').css('opacity', '0');
+//		$('.circle').css('opacity', '0');
 	}
 
 	/*
@@ -186,7 +192,7 @@ GameStatus = {
 	*	If a transition is currently being set, sets the state as the transition target and activates the action-picking menu.
 	*	Otherwise, activates the state as the current state and shows a selection of the input alphabet.
 	*/
-	function stateDoubleclick(e) {
+	function stateClick(e) {
 		e.preventDefault();
 		e.stopPropagation();
 
@@ -199,6 +205,12 @@ GameStatus = {
 			}
 
 			var id = $(this).attr('id');
+			
+			//Remove initial if it is that
+			if(initialId == id) {
+				initialId = undefined;
+			}
+
 			delete states[id];
 			
 			instance.repaintEverything();
@@ -212,11 +224,20 @@ GameStatus = {
 			newState = states[$(this).attr('id')];		
 			placeMenu(e);
 		} else {
-			hideButtons();
-			$(this).find('.circle').css('opacity', '1');//.fadeIn();
+			//hideButtons();
+			//$(this).find('.circle').css('opacity', '1');//.fadeIn();
 			$('.stateon').removeClass('stateon');
 			$(this).addClass('stateon');
 		}
+	}
+
+	function stateDoubleclick(e) {
+		e.preventDefault();
+		e.stopPropagation();
+
+		$('.initial').removeClass('initial');
+		$(this).addClass('initial');
+		initialId = $(this).attr('id');
 	}
 
 	/*
@@ -267,17 +288,13 @@ GameStatus = {
 
 		instance.draggable(src);
 
-		var dynamicAnchors = [
-			[0, 0.5, 1, 0, -10, 0], 
-			[0.5, -1, 0.5, 0.5, 0, -10]
-		];
 		instance.connect({
 			source : src,
 			target : dest,
 			overlays : [
 				[ "Label", {label : actionName(action), location: 0.35, cssClass : "lbl"}]
 			],
-			anchors: ["Continuous", [ "Continuous", {faces : ["top", "left", "right"]}]]
+			anchors: ["Continuous",  ["Continuous", {faces : ["top", "left", "right"]}]]
 		});
 	}
 
@@ -368,7 +385,8 @@ GameStatus = {
 		div.css('top', y);
 
 		//Event handler for doubleclick
-		div.on('click', stateDoubleclick);
+		div.on('click', stateClick);
+		div.on('dblclick', stateDoubleclick);
 		div.on('mousemove', function() { instance.repaintEverything(); });
 
 
@@ -463,17 +481,19 @@ GameStatus = {
 			play(e);
 		}
 
+		if(status == Status.Play) {
+			return;
+		} else if (status == Status.Stop) {
+			currentState = undefined;
+		}
+
 		if(currentState == undefined) {
-			currentState = findFirstAvailableState();
+			currentState = getInitialState();
 			if(currentState == null) {
 				alert('You need at least one state for this to work, silly!');
 				currentState = undefined;
 				return;
 			}
-		}
-
-		if(status == Status.Play) {
-			return;
 		}
 
 		hideButtons();
@@ -502,7 +522,7 @@ GameStatus = {
 		if(status == Status.Pause) {
 			return;
 		} else if(status == Status.Stop) {
-			currentState = findFirstAvailableState();
+			currentState = getInitialState();
 			letterIndex = 0;
 			steps = 0;
 			return;
@@ -520,18 +540,23 @@ GameStatus = {
 		$('.stateon').removeClass('stateon');
 		var self = $('#' + currentState.Name);
 		self.addClass('stateon');
+		self.effect('bounce', {'times' : 3}, 'slow');
 		letterIndex = (letterIndex + 1) % inputStr.length;
 
 		Crafty.trigger('Step', queue.shift());
 	}
 
-	function calculateScore() {
+	function calculateScore(oldScore) {
 		var statesize = Object.keys(states).length;
 
 		var statescore = 1000 * Math.max(0, par.states - statesize);
 		var stepscore = 100 * Math.max(0, par.steps - steps);
+		var transscore = 10 * 0;
+		var score = statescore + stepscore + transscore;
 
-		publishScore(statescore, stepscore, 0);
+		if (oldScore >= score) return oldScore;
+
+		publishScore(statescore, stepscore, transscore);
 		return statescore + stepscore;
 	}
 
@@ -546,7 +571,8 @@ GameStatus = {
 
 	function success() {
 		gameStatus = GameStatus.Win;
-		$('#score').html(calculateScore());
+		var score = $('#score');
+		score.html(calculateScore(score.html()));
 	}
 
 	function failure() {
@@ -616,10 +642,12 @@ GameStatus = {
 			if(addingState === true) {
 				addingState = false;
 				enableRightImage();
+				var area = $('#automatons');
 				var pos = mousePos(e);
-				var yOffset = $('#automatons').position().top + 15;
+				var yOffset = area.position().top + 15;
 				var divOffset = 15;
-				addState(pos.x - divOffset, pos.y - yOffset - divOffset);
+
+				addState(pos.x - divOffset + area.scrollLeft(), pos.y - yOffset - divOffset + area.scrollTop());
 			}
 		});
 
@@ -636,7 +664,7 @@ GameStatus = {
 			ConnectorStyle:{ strokeStyle:"#027777", lineWidth:2, outlineColor:"transparent", outlineWidth:4 },
 			ConnectionOverlays : [
 				[ "Arrow", { 
-					location:1,
+					location:0.9,
 					id:"arrow",
                     length:20,
                     width: 8,

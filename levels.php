@@ -16,13 +16,21 @@ $levels = mysql_query("SELECT * FROM level");
 <!DOCTYPE html>
 <html>
     <head>
-        <title>List of Levels</title>
+        <title>Level Selection</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <link rel="stylesheet" type="text/css" href="/css/style.css"/>
     </head>
     <body>
-        
+        <div class="headertitle">
+            Level Selection
+        </div>
+        <div class="headerlist">
+            <ul>
+                <a href="tutorial.html"><li>Tutorial</li></a>
+                <a href="logout.php"><li>Log Out</li></a>
+            </ul>
+        </div>
         <div class="lista">
-                <h1>Lista levela</h1>
                 <ul>
                 <?php
                 while ($lev=mysql_fetch_array($levels)){

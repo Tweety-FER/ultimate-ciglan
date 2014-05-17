@@ -1,6 +1,52 @@
 body {
 	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
 	background: #f9f9f9;
+	margin: 0;
+	margin-bottom: 5px;
+	padding: 0;
+}
+
+cite::before {
+	content: open-quote;
+}
+
+cite::after {
+	content: close-quote;
+}
+
+#textbody {
+	margin-left: 5%;
+	margin-right: 5%;
+}
+
+#textbody ul {
+	text-align: center;
+	list-style: none;
+}
+
+#textbody h2 {
+	margin-left: -10px;
+	margin-top: 30px;
+}
+
+#textbody hr {
+    border: 0;
+    height: 1px;
+    background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
+    background-image:    -moz-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
+    background-image:     -ms-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
+    background-image:      -o-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
+}
+
+.imagebox {
+	width: 800px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.imagebox .caption {
+	text-align: center;
+	font-size: 12pt;
 }
 
 .lista h1 {   
@@ -51,47 +97,148 @@ body {
 	vertical-align: center;
 }
 
+.headertitle {
+	background-color: #bbb;
+	color: black;
+	font-family: "Lucida Grande", Arial, sans-serif;
+	text-align: center;
+	vertical-align: text-bottom;
+	width: 100%;
+	font-size: 16pt;
+	font-weight: 200;
+	height: 2em;
+	margin: 0;
+	padding: 0;
+	padding-top: 5px;
+	margin-bottom: 10px;
+}
+
+.headerlist {
+	color: black;
+	font-family: Arial, sans-serif;
+	text-align: center;
+	vertical-align: center;
+	width: 100%;
+	font-size: 14pt;
+}
+
+.headerlist ul {
+	display: inline-block;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	margin-top: 0.5em;
+}
+
+.headerlist li {
+	display: inline-block;
+	margin-top: 0;
+	background-color: #eee;
+	border: 1px solid rgba(80, 80, 80, 0.5);
+	border-radius: 5px;
+	width: 50%;
+	text-align: center;
+	font-weight: bolder;
+	width: 98%;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	margin-top: 5px;
+	box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.5);
+}
+
+.headerlist a {
+	text-decoration: none;
+	color: black;
+}
+
+.headerlist li:hover {
+	background-color: #ddd;
+}
+
+.headerlist li:active {
+	background-color: #ccc;
+}
+
+.headerlist ul li:first-child {
+	margin-top: 0;
+}
+
+.headerlist ul li:last-child {
+	margin-bottom: 5px;
+}
+
 #login {
+	position: relative;
 	width: 400px;
 	height: 200px;
 	vertical-align: center;
 	margin: 0 auto;
-	background-color: black;
+	background-color: #bbb;
 	border-radius: 15px;
-	border: 2px dashed #DCDCB7;
-	color: rgb(220, 220, 220);
+	border: 2px dashed #fff;
+	color: #000;
+	font-weight: bold;
 	text-align: center;
 	padding-top: 30px;
-	box-shadow: 0 0 0 4px black, 2px 1px 6px 4px rgba(10, 10, 0, 0.5);
+	box-shadow: 0 0 0 4px #bbb, 2px 1px 6px 4px #bbb;
 }
 
-#header {
-	width: 600px;
-	height: 300px;
-	margin: auto;
-	margin-top: 5px;
+#login label {
+	position: absolute;
+	left: 25px;
+	margin: 5px;
 	margin-bottom: 10px;
 }
 
-#header .left {
-	float: left;
-	width: 400px;
+#login input {
+	position: absolute;
+	right: 25px;
+	margin: 5px;
+	margin-bottom: 10px;
 }
 
-#header .left h1 {
-	font-size: 14pt;
-	font-variant: normal;
-	font-family: sans-serif;
+.button {
+	display: inline-block;
+	margin-top: 0;
+	text-align: center;
+	font-weight: bolder;
+	background-color: #eee;
+	border: 1px solid rgba(80, 80, 80, 0.5);
+	border-radius: 5px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	margin-top: 5px;
+	box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.5);
+	width: 150px;
+	height: 30px;
 }
 
-#header .right {
-	float: right;
-	width: 200px;
+.button:hover {
+	background-color: #ddd;
+}
+
+.button:active {
+	background-color: #ccc;
+}
+
+.buttonlogin, .buttonregister {
+	position: absolute;
+	bottom: 20px;
+}
+
+.buttonlogin {
+	left: 25px;
+}
+
+.buttonregister {
+	right: 25px;
 }
 
 #game {
 	position: relative;
 	margin: auto;
+	margin-top: 15px;
 	width: 480px;
 	height: 370px;
 	border: 1px solid black;
@@ -222,11 +369,14 @@ div .statecontainer.stateon:hover {
 	background-image: url('/img/StateOnHover.png');
 }
 
-div.statecontainer img {
-	height: 100px;
-	width: 100px;
-	margin: auto;
-	vertical-align: 0;
+div.statecontainer.initial {
+	background-color: #282;
+	border-radius: 50%;
+	box-shadow: 1px 1px 4px 0 #282;
+}
+
+div.statecontainer.initial:hover {
+	background-color: #393;
 }
 
 div.statecontainer span.statename {
@@ -238,12 +388,21 @@ div.statecontainer span.statename {
 	left: 40px;
 	top: 40px;
 	cursor: inherit;
+	user-select: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
 }
 
 div.statecontainer .circle {
 	width: 25px;
 	height: 25px;
 	position: absolute;
+	z-index: 1000;
+	user-select: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
 }
 
 div.statecontainer .circle img {
@@ -281,82 +440,6 @@ div.statecontainer .circle .text {
 	top: 2px;
 }
 
-.buttonlogin {
-	-moz-box-shadow:inset 0px 1px 0px 0px #fceaca;
-	-webkit-box-shadow:inset 0px 1px 0px 0px #fceaca;
-	box-shadow:inset 0px 1px 0px 0px #fceaca;
-	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ffce79), color-stop(1, #eeaf41) );
-	background:-moz-linear-gradient( center top, #ffce79 5%, #eeaf41 100% );
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffce79', endColorstr='#eeaf41');
-	background-color:#ffce79;
-	-webkit-border-top-left-radius:15px;
-	-moz-border-radius-topleft:15px;
-	border-top-left-radius:15px;
-	text-indent:0;
-	border:1px solid #eeb44f;
-	display:inline-block;
-	color:#ffffff;
-	font-family:Verdana;
-	font-size:15px;
-	font-weight:bold;
-	font-style:normal;
-	height:40px;
-	line-height:40px;
-	width:100px;
-	text-decoration:none;
-	text-align:center;
-	text-shadow:1px 1px 0px #ce8e28;
-	margin-top: 100px;
-	margin-right: 50px;
-}
-.buttonlogin:hover {
-	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #eeaf41), color-stop(1, #ffce79) );
-	background:-moz-linear-gradient( center top, #eeaf41 5%, #ffce79 100% );
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#eeaf41', endColorstr='#ffce79');
-	background-color:#eeaf41;
-}.buttonlogin:active {
-	position:relative;
-	top:1px;
-}
-
-.buttonregister {
-	-moz-box-shadow:inset 0px 1px 0px 0px #fceaca;
-	-webkit-box-shadow:inset 0px 1px 0px 0px #fceaca;
-	box-shadow:inset 0px 1px 0px 0px #fceaca;
-	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ffce79), color-stop(1, #eeaf41) );
-	background:-moz-linear-gradient( center top, #ffce79 5%, #eeaf41 100% );
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffce79', endColorstr='#eeaf41');
-	background-color:#ffce79;
-	-webkit-border-top-right-radius:15px;
-	-moz-border-radius-topright:15px;
-	border-top-right-radius:15px;
-	text-indent:0;
-	border:1px solid #eeb44f;
-	display:inline-block;
-	color:#ffffff;
-	font-family:Verdana;
-	font-size:15px;
-	font-weight:bold;
-	font-style:normal;
-	height:40px;
-	line-height:40px;
-	width:100px;
-	text-decoration:none;
-	text-align:center;
-	text-shadow:1px 1px 0px #ce8e28;
-	margin-top: 100px;
-	margin-left:50px;
-}
-.buttonregister:hover {
-	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #eeaf41), color-stop(1, #ffce79) );
-	background:-moz-linear-gradient( center top, #eeaf41 5%, #ffce79 100% );
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#eeaf41', endColorstr='#ffce79');
-	background-color:#eeaf41;
-}.buttonregister:active {
-	position:relative;
-	top:1px;
-}
-
 #actionmenu {
 	z-index: 30;
 	display: block;
@@ -379,13 +462,13 @@ div.statecontainer .circle .text {
 }
 
 #actionmenu #halt {
-	bottom: 4px;
-	left: 75px;
+	bottom: -1px;
+	left: 70px;
 }
 
 #actionmenu #jump {
-	top: 4px;
-	left: 75px;
+	top: -1px;
+	left: 70px;
 }
 
 #actionmenu #right {
@@ -394,58 +477,60 @@ div.statecontainer .circle .text {
 }
 
 #actionmenu #left {
-	left: 4px;
+	left: -4px;
 	top: 74px;
 }
 
 #actionmenu #jumpright {
-	right: 9px;
-	top: 9px;
+	right: 19px;
+	top: 14px;
 }
 
 #actionmenu #jumpleft {
 	left: 9px;
-	top: 9px;
+	top: 14px;
 }
 
 #actionmenu #chalt {
-	bottom: 0;
-	left: 70px;
+	bottom: -5px;
+	left: 65px;
 }
 
 #actionmenu #cjump {
-	top: 0;
-	left: 70px;
+	top: -5px;
+	left: 65px;
 }
 
 #actionmenu #cright {
-	right: 0;
+	right: 0px;
 	top: 70px;
 }
 
 #actionmenu #cleft {
-	left: 0;
+	left: -10px;
 	top: 70px;
 }
 
 #actionmenu #cjumpright {
-	right: 5px;
-	top: 5px;
+	right: 15px;
+	top: 10px;
 }
 
 #actionmenu #cjumpleft {
 	left: 5px;
-	top: 5px;
+	top: 10px;
 }
 
 .lbl {
 	color: #006666;
-	padding-bottom: 20px;
-	z-index: 100;
+	padding-bottom: 1em;
+	-padding-left: 3.5em;
+	z-index: 20;
 	user-select: none;
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
+	cursor: pointer;
 }
 
 ._jsPlumb_connector, ._jsPlumb_endpoint, ._jsPlumb_overlay { 

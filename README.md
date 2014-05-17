@@ -8,7 +8,7 @@ Mealy Another Adventure is a simple online arcade game in which the player contr
 The player thus solves simple tasks like collecting keys and skipping over pits with automata instead of the traditional keyboard or swipes.
 Each level features the level itself, as well as default input string. The automata are used to parse the input string and produce actions.  
 The automata are Mealy automata, and as such for each state and input character, they transition into a new state and produce an action.
-Check the tutorial for more. (Not yet written)
+Check the tutorial (/tutorial.html) for more.
 
 ## Technologies and Libraries Used
 
