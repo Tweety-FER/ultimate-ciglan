@@ -1,9 +1,9 @@
 body {
-	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
-	background: #f9f9f9;
-	margin: 0;
+	font-family:   "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+	background:    #f9f9f9;
+	margin: 	   0;
 	margin-bottom: 5px;
-	padding: 0;
+	padding: 	   0;
 }
 
 cite::before {
@@ -15,7 +15,7 @@ cite::after {
 }
 
 #textbody {
-	margin-left: 5%;
+	margin-left:  5%;
 	margin-right: 5%;
 }
 
@@ -26,12 +26,12 @@ cite::after {
 
 #textbody h2 {
 	margin-left: -10px;
-	margin-top: 30px;
+	margin-top:   30px;
 }
 
 #textbody hr {
-    border: 0;
-    height: 1px;
+    border: 		  0;
+    height: 		  1px;
     background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
     background-image:    -moz-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
     background-image:     -ms-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
@@ -39,78 +39,78 @@ cite::after {
 }
 
 .imagebox {
-	width: 800px;
-	margin: 0 auto;
+	width: 		800px;
+	margin: 	0 auto;
 	text-align: center;
 }
 
 .imagebox .caption {
 	text-align: center;
-	font-size: 12pt;
+	font-size:  12pt;
 }
 
 .lista h1 {   
-    font-family:Georgia,serif,Times; 
-    margin-left:auto;
-    margin-right:auto;
-    width:17%;
-    color:rgb(28,28,58); 
+    font-family:	Georgia,serif,Times; 
+    margin-left:	auto;
+    margin-right:	auto;
+    width:			17%;
+    color:			rgb(28,28,58); 
 }
 
 .lista ul { 
-    list-style:none; 
-    margin-left:auto;
-    margin-right:auto;
-    width:25%;
+    list-style:	  none; 
+    margin-left:  auto;
+    margin-right: auto;
+    width:		  25%;
 }
 
 .lista ul li { 
-    font-family:Georgia,serif,Times; 
-    font-size:18px; 
+    font-family:	Georgia,serif,Times; 
+    font-size:		18px; 
 } 
 
 .lista ul li a { 
-    display:block; 
-    width:300px; 
-    height:28px; 
+    display:		  block; 
+    width:			  300px; 
+    height:			  28px; 
     background-color: rgb(28,28,58); 
-    border-left:5px solid #222; 
-    border-right:5px solid #222; 
-    padding-left:10px;
-    text-decoration:none; 
-    color:#FFF;
+    border-left:	  5px solid #222; 
+    border-right:	  5px solid #222; 
+    padding-left:	  10px;
+    text-decoration:  none; 
+    color:			  #FFF;
 }
 
 .lista ul li a:hover {  
-    -moz-transform:rotate(-5deg); 
-    -moz-box-shadow:10px 10px 20px #000000;
-    -webkit-transform:rotate(-5deg); 
-    -webkit-box-shadow:10px 10px 20px #000000;
-    transform:rotate(-5deg); 
-    box-shadow:10px 10px 20px #000000; 
+    -moz-transform:		rotate(-5deg); 
+    -moz-box-shadow:	10px 10px 20px #000000;
+    -webkit-transform:  rotate(-5deg); 
+    -webkit-box-shadow: 10px 10px 20px #000000;
+    transform:			rotate(-5deg); 
+    box-shadow:			10px 10px 20px #000000; 
 }
 
 .letter {
-	font-size: 1.5em;
-	margin-right: 5px;
-	color: white;
+	font-size: 		1.5em;
+	margin-right: 	5px;
+	color: 			white;
 	vertical-align: center;
 }
 
 .headertitle {
 	background-color: #bbb;
-	color: black;
-	font-family: "Lucida Grande", Arial, sans-serif;
-	text-align: center;
-	vertical-align: text-bottom;
-	width: 100%;
-	font-size: 16pt;
-	font-weight: 200;
-	height: 2em;
-	margin: 0;
-	padding: 0;
-	padding-top: 5px;
-	margin-bottom: 10px;
+	color: 			  black;
+	font-family: 	  "Lucida Grande", Arial, sans-serif;
+	text-align: 	  center;
+	vertical-align:   text-bottom;
+	width: 			  100%;
+	font-size: 		  16pt;
+	font-weight: 	  200;
+	height: 		  2em;
+	margin: 		  0;
+	padding: 		  0;
+	padding-top: 	  5px;
+	margin-bottom: 	  10px;
 }
 
 .headerlist {
@@ -457,33 +457,33 @@ div.statecontainer .circle .text {
 
 #actionmenu .crc {
 	position: absolute;
-	width: 30px;
-	height: 30px;
+	width:    30px;
+	height:   30px;
 }
 
 #actionmenu #halt {
 	bottom: -1px;
-	left: 70px;
+	left:   70px;
 }
 
 #actionmenu #jump {
-	top: -1px;
+	top:  -1px;
 	left: 70px;
 }
 
 #actionmenu #right {
 	right: 4px;
-	top: 74px;
+	top:  74px;
 }
 
 #actionmenu #left {
 	left: -4px;
-	top: 74px;
+	top:  74px;
 }
 
 #actionmenu #jumpright {
 	right: 19px;
-	top: 14px;
+	top:   14px;
 }
 
 #actionmenu #jumpleft {
@@ -493,27 +493,27 @@ div.statecontainer .circle .text {
 
 #actionmenu #chalt {
 	bottom: -5px;
-	left: 65px;
+	left:   65px;
 }
 
 #actionmenu #cjump {
-	top: -5px;
+	top:  -5px;
 	left: 65px;
 }
 
 #actionmenu #cright {
 	right: 0px;
-	top: 70px;
+	top:  70px;
 }
 
 #actionmenu #cleft {
 	left: -10px;
-	top: 70px;
+	top:   70px;
 }
 
 #actionmenu #cjumpright {
 	right: 15px;
-	top: 10px;
+	top:   10px;
 }
 
 #actionmenu #cjumpleft {
@@ -522,15 +522,15 @@ div.statecontainer .circle .text {
 }
 
 .lbl {
-	color: #006666;
-	padding-bottom: 1em;
-	-padding-left: 3.5em;
-	z-index: 20;
-	user-select: none;
+	color: 				 #066;
+	padding-bottom: 	 1em;
+	-padding-left: 		 3.5em;
+	z-index: 			 20;
+	user-select: 		 none;
 	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	cursor: pointer;
+	-moz-user-select: 	 none;
+	-ms-user-select: 	 none;
+	cursor: 			 pointer;
 }
 
 ._jsPlumb_connector, ._jsPlumb_endpoint, ._jsPlumb_overlay { 
@@ -538,20 +538,20 @@ div.statecontainer .circle .text {
 }
 
 #score {
-	color: white;
-	font-size: 18pt;
-	margin: 0 auto;
-	margin-top: 5px;
-	display: inline-block;
+	color: 			#fff;
+	font-size: 		18pt;
+	margin: 		0 auto;
+	margin-top: 	5px;
+	display: 		inline-block;
 	vertical-align: text-bottom;
 }
 
 #leftbuttons {
-	float: left;
+	float: 		 left;
 	margin-left: 1em;
 }
 
 #rightbuttons {
-	float: right;
+	float: 		  right;
 	margin-right: 1em;
 }

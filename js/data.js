@@ -157,9 +157,7 @@ GameStatus = {
 	/*
 	*	Gets the current mouse position from the event
 	*/
-	function mousePos (e) {
-        return {'x' : e.pageX, 'y' : e.pageY};
-	}
+	function mousePos (e) { return {'x' : e.pageX, 'y' : e.pageY};}
 
 	function getClosest(x, y) {
 		var ret = {'x' : x, 'y': y};
@@ -239,6 +237,9 @@ GameStatus = {
 		}
 	}
 
+	/*
+	*	Set the state as an initial state.
+	*/
 	function stateDoubleclick(e) {
 		e.preventDefault();
 		e.stopPropagation();
