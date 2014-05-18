@@ -11,7 +11,7 @@ if (isset($_SESSION['userId'])) {
 		<title>Mealy Another Adventure - Index</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <link rel="stylesheet" type="text/css" href="css/style.css"/>
-        <script type="text/javascript" src="js/jquery-2.0.3.min.js"></script>
+        <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
         <script type="text/javascript" src="js/jquery.validate.min.js"></script>
         <script type="text/javascript" src="js/basic.js"></script>
 	</head>

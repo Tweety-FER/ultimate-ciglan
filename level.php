@@ -30,9 +30,9 @@ $level = json_decode($level['level']);
    <TITLE>Mealy Another Adventure - Game</TITLE> 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <link rel="stylesheet" type="text/css" href="css/style.css"/>
-        <script type="text/javascript" src="js/jquery-2.0.3.min.js"></script>
-        <script type="text/javascript" src="js/jquery-ui-1.10.4.custom.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="css/jquery-ui-1.10.4.custom.min.css" />
+        <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript" src="http://code.jquery.com/ui/1.10.4/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" />
         <script type="text/javascript" src="js/data.js"></script>
         <script src="js/jquery.jsPlumb-1.4.1-all-min.js"></script>
         <script type="text/javascript" src="js/crafty.js"></script>
