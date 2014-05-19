@@ -91,6 +91,8 @@ GameStatus = {
 		}
 
 		for(var s in states) {
+			initialId = s;
+			$('#' + s).addClass('initial');
 			return states[s];
 		}
 
