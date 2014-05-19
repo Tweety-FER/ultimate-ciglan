@@ -1,6 +1,6 @@
 Game = {
     //if debug is true movement with qweasd is possible
-    debug: true,
+    debug: false,
 
     //sound for game part
     sound: true,
