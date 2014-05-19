@@ -298,19 +298,25 @@ Crafty.c("Ticker", {
         this.onLose = data.onLose;
         this.onCont = data.onCont;
         this.isRunning = true;
-        console.log("Simulation: starting");
+        if (Game.debug) {
+            console.log("Simulation: starting");
+        }
     },
     pause: function(data){
         this.isRunning = false;
     },
     stop: function(data){
-        console.log("Simulation: stopping");
+        if (Game.debug) {
+            console.log("Simulation: stopping");
+        }
         this.isRunning = false;
         this.winCondition = false;
         Game.levelLoad();
     },
     finished: function(data){
-        console.log("Finished: " + data.toString());
+        if (Game.debug) {
+            console.log("Finished: " + data.toString());
+        }
         Game.textStopToReset = Crafty.e("EndText").attr({x:Game.width()/2-85,y:Game.height()/2+10, w:200}).text("Press stop to reset simulation").textFont({size:"13px"}).unselectable();
         Game.textStopToReset._globalZ = 100000;
         if(data){
