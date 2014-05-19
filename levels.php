@@ -9,7 +9,7 @@ if (! isset($_SESSION['userId'])) {
 
 require("includes/config.php");
 
-$levels = mysql_query("SELECT * FROM level");
+$levels = mysql_query("SELECT * FROM Level");
 
 ?>
 
@@ -23,23 +23,19 @@ $levels = mysql_query("SELECT * FROM level");
     <body>
         <div class="headertitle">
             Level Selection
+            <a href="logout.php"><button class="logout">Logout</button></a>
         </div>
         <div class="headerlist">
             <ul>
                 <a href="tutorial.html"><li>Tutorial</li></a>
-                <a href="logout.php"><li>Log Out</li></a>
-            </ul>
-        </div>
-        <div class="lista">
-                <ul>
                 <?php
                 while ($lev=mysql_fetch_array($levels)){
                     $leveldata = json_decode($lev['level']);
-                    echo "<li><a href='level.php?id=$lev[id]'>Level $leveldata->title</a></li>";
+                    echo "<a href='level.php?id=$lev[id]'><li>Level $leveldata->title</li></a>";
                         
                 } 
                 ?>
-        </ul>
-            </div>
+            </ul>
+        </div>
     </body>
 </html>

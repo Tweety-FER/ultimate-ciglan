@@ -3,7 +3,7 @@ session_start();
 
 include("includes/config.php");
 if (isset($_SESSION['username'])) {
-	$error = ['succes' => False, 'redirect' => True, 'description' => 'User is already logged in!'];
+	$error = ['succes' => False, 'redirect' => True, 'description' => 'User is already logged in!<br/>'];
 	echo json_encode($error);
 	die();
 }
@@ -21,7 +21,7 @@ $sql = mysql_query("SELECT * FROM User WHERE username = '$username' AND passhash
 $result = mysql_fetch_array($sql);
 
 if ($result['username'] !== $username) {
-	$error = ['success' => False, 'redirect' => False, 'description' => 'User entered wrong login info!'];
+	$error = ['success' => False, 'redirect' => False, 'description' => 'User entered wrong login info!<br/>'];
 	echo json_encode($error);
 	die();
 } else {

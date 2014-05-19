@@ -204,7 +204,6 @@ GameStatus = {
 		e.preventDefault();
 		e.stopPropagation();
 
-
 		if(deletingState) {
 			var children = $(this).children();
 
@@ -229,11 +228,11 @@ GameStatus = {
 		}
 
 		if(active !== null) {		
-			newState = states[$(this).attr('id')];		
+			newState = states[$(this).attr('id')];	
+			$(this).addClass('stateon');	
 			placeMenu(e);
 		} else {
 			$('.stateon').removeClass('stateon');
-			$(this).addClass('stateon');
 		}
 	}
 
@@ -271,6 +270,7 @@ GameStatus = {
 		arrowConnect(state, active.input, newState, action);
 
 		newState = undefined;
+		$('.stateon').removeClass('stateon');
 		$('#actionmenu').hide();
 		normalizeButtons();
 		active = null;
@@ -303,7 +303,7 @@ GameStatus = {
 			overlays : [
 				[ "Label", {label : actionName(action), location: 0.35, cssClass : "lbl"}]
 			],
-			anchors: ["Continuous",  ["Continuous", {faces : ["top", "left", "right"]}]]
+			anchors: [ ["Perimeter", {shape : "Circle"}],["Perimeter", {shape: "Circle"}] ]
 		});
 	}
 
@@ -403,6 +403,7 @@ GameStatus = {
 			var me = $(this);
 			ev.preventDefault();
 			ev.stopPropagation();
+			me.parent().addClass('stateon');
 			resizeIcons(me);
 			activateConnections(me);
 		});
@@ -667,11 +668,11 @@ GameStatus = {
 		instance = jsPlumb.getInstance({
 			Endpoint : ["Dot", {radius:2}],
 			PaintStyle : {strokeStyle:"#027777", lineWidth: 2},
-			Connector: [ "Flowchart", {midpoint : 0.5, stub: 15, alwaysRespectStubs: true, cornerRadius: 15}],
-			ConnectorStyle:{ strokeStyle:"#027777", lineWidth:2, outlineColor:"transparent", outlineWidth:4 },
+			Connector: [ "Flowchart", {midpoint : 0.5, stub: 50, alwaysRespectStubs: true, cornerRadius: 15}],
+			ConnectorStyle:{ strokeStyle:"#027777", lineWidth:2, outlineColor:"transparent", outlineWidth: 4},
 			ConnectionOverlays : [
 				[ "Arrow", { 
-					location:0.9,
+					location:0.4,
 					id:"arrow",
                     length:20,
                     width: 8,

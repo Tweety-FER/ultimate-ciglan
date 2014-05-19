@@ -24,11 +24,11 @@
 
 		messages : {
 			username: {
-				minlength: "Please enter at least 2 characters.",
-				maxlength: "Maximum number of characters exceeded."
+				minlength: "",
+				maxlength: ""
 			},
 			password: {
-				minlength: "Please enter stronger password."
+				minlength: ""
 			}
 		},
 
@@ -52,7 +52,7 @@
 				if(msg.redirect) {
 					window.location = "/levels.php";
 				} else {
-					$('#error').html(msg.description);
+					$('#error').html(msg.description + "<br/>");
 				}
 			}
 		});

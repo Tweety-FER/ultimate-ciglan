@@ -16,7 +16,7 @@ if (isset($_SESSION['userId'])) {
         <script type="text/javascript" src="js/basic.js"></script>
 	</head>
 	<body>
-			<div class="headertitle">MEALY ANOTHER ADVENTURE</div>
+			<div class="headertitle">Mealy Another Adventure</div>
 		<div id="login">
 			<form id="form" method="POST" action="">
 				<div id="error"></div>

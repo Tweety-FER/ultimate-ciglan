@@ -49,47 +49,6 @@ cite::after {
 	font-size:  12pt;
 }
 
-.lista h1 {   
-    font-family:	Georgia,serif,Times; 
-    margin-left:	auto;
-    margin-right:	auto;
-    width:			17%;
-    color:			rgb(28,28,58); 
-}
-
-.lista ul { 
-    list-style:	  none; 
-    margin-left:  auto;
-    margin-right: auto;
-    width:		  25%;
-}
-
-.lista ul li { 
-    font-family:	Georgia,serif,Times; 
-    font-size:		18px; 
-} 
-
-.lista ul li a { 
-    display:		  block; 
-    width:			  300px; 
-    height:			  28px; 
-    background-color: rgb(28,28,58); 
-    border-left:	  5px solid #222; 
-    border-right:	  5px solid #222; 
-    padding-left:	  10px;
-    text-decoration:  none; 
-    color:			  #FFF;
-}
-
-.lista ul li a:hover {  
-    -moz-transform:		rotate(-5deg); 
-    -moz-box-shadow:	10px 10px 20px #000000;
-    -webkit-transform:  rotate(-5deg); 
-    -webkit-box-shadow: 10px 10px 20px #000000;
-    transform:			rotate(-5deg); 
-    box-shadow:			10px 10px 20px #000000; 
-}
-
 .letter {
 	font-size: 		1.5em;
 	margin-right: 	5px;
@@ -98,7 +57,7 @@ cite::after {
 }
 
 .headertitle {
-	background-color: #bbb;
+	background-color: #bb8050;
 	color: 			  black;
 	font-family: 	  "Lucida Grande", Arial, sans-serif;
 	text-align: 	  center;
@@ -106,11 +65,12 @@ cite::after {
 	width: 			  100%;
 	font-size: 		  16pt;
 	font-weight: 	  200;
-	height: 		  2em;
+	height: 		  1.5em;
 	margin: 		  0;
 	padding: 		  0;
 	padding-top: 	  5px;
 	margin-bottom: 	  10px;
+	box-shadow: 	  1px 1px 2px 0px rgba(0, 0, 0, 0.5);
 }
 
 .headerlist {
@@ -118,8 +78,9 @@ cite::after {
 	font-family: Arial, sans-serif;
 	text-align: center;
 	vertical-align: center;
-	width: 100%;
+	width: 25%;
 	font-size: 14pt;
+	margin: 0 auto;
 }
 
 .headerlist ul {
@@ -168,20 +129,24 @@ cite::after {
 	margin-bottom: 5px;
 }
 
+#error {
+	padding-bottom: 10px;
+	font-size: 10pt;
+	color: #666;
+}
+
 #login {
 	position: relative;
 	width: 400px;
-	height: 200px;
+	height: 165px;
 	vertical-align: center;
 	margin: 0 auto;
-	background-color: #bbb;
-	border-radius: 15px;
-	border: 2px dashed #fff;
+	background-color: #f9f9f9;
 	color: #000;
 	font-weight: bold;
 	text-align: center;
 	padding-top: 30px;
-	box-shadow: 0 0 0 4px #bbb, 2px 1px 6px 4px #bbb;
+	font-size: 11pt;
 }
 
 #login label {
@@ -233,6 +198,24 @@ cite::after {
 
 .buttonregister {
 	right: 25px;
+}
+
+.logout {
+	float: right;
+	margin-right: 1em;
+	margin-top: 0;
+	width: 80px;
+	height: 25px;
+	border: 0;
+	background-color: #ccc;
+}
+
+.logout:hover {
+	background-color: #ddd;
+}
+
+.logout:active {
+	background-color: #eee;
 }
 
 #game {
@@ -522,9 +505,8 @@ div.statecontainer .circle .text {
 }
 
 .lbl {
-	color: 				 #066;
-	padding-bottom: 	 1em;
-	-padding-left: 		 3.5em;
+	color: 				 #244;
+	padding-bottom: 	 2em;
 	z-index: 			 20;
 	user-select: 		 none;
 	-webkit-user-select: none;
