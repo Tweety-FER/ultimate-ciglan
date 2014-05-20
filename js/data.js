@@ -213,6 +213,8 @@ GameStatus = {
 				instance.detachAllConnections(children[i]);
 			}
 
+			instance.detachAllConnections($(this))
+
 			var id = $(this).attr('id');
 			
 			//Remove initial if it is that
